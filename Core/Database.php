@@ -10,8 +10,6 @@ class Database{
     private $user;
     private $pass;
 
-    
-
     public function __construct()
     {
         try {

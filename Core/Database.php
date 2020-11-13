@@ -23,4 +23,20 @@ class Database{
             return $e->getMessage();
         }
     }
+
+    public function query(string $statement, bool $bin)
+    {
+        $query = $this->pdo->query($statement);
+        if ($bin === false) {
+            return $query->fetch(\PDO::FETCH_ASSOC);
+        } else {
+            return $query->fetchAll(\PDO::FETCH_ASSOC);
+        }
+    }
+
+    public function prepare(string $statement, array $data = array())
+    {
+        $prepare = $$this->pdo->prepare($statement);
+        $prepare->execute($data);
+    }
 }

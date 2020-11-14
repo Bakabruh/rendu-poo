@@ -3,10 +3,6 @@ namespace App\Model;
 
 use Core\Database;
 
-<<<<<<< HEAD
-class userModel extends Database{
-
-=======
 class UserModel extends Database{
     
     private $mail;
@@ -104,7 +100,6 @@ class UserModel extends Database{
 
         return $this;
     }
->>>>>>> 52fee9cfb845b8f2dbdc62508defde00302f0784
 
     public function getUsers()
     {

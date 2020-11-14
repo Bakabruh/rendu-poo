@@ -1,1 +1,3 @@
 /Core/Config/config.php
+/vendor/
+.idea

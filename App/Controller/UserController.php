@@ -8,7 +8,6 @@ use Core\Database;
 
 class UserController {
 
-
     // public function __construct()
     // {
     //     $this->model = new UserModel();

@@ -14,6 +14,11 @@ if(array_key_exists("page", $_GET)){
             $controller = new UserController();
             $controller->userIndex();
             break;
+
+        case 'home' :
+            $controller = new DefaultController();
+            $controller->homeIndex();
+            break;
         default:
             # code...
             break;

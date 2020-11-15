@@ -37,8 +37,6 @@ class Database{
     public function prepare(string $statement, array $data = array())
     {
 
-        var_dump($this->pdo);
-        // die();
         $prepare = $this->pdo->prepare($statement);
         $prepare->execute($data);
     }

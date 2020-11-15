@@ -2,7 +2,7 @@
 
 use App\Controller\UserController;
 
-include ROOT."/bootstraplink.html"; ?>
+require ROOT."/commons.php"; ?>
 
 
 <form action="" method="POST">

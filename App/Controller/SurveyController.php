@@ -6,7 +6,7 @@ use App\Model\SurveyModel;
 class surveyController
 {
     public function __construct() {
-        $this->model = new SurveyModel();
+        $this->model = new Survey();
     }
 
     public function renderIndex()

@@ -16,7 +16,7 @@ class UserController {
     public function createUser() 
     {
 
-        if($_POST) {
+        if($_POST && $_POST['action'] == "create") {
             
             $newUser = [
                 "mail" => $_POST['mail'],
@@ -30,11 +30,62 @@ class UserController {
             
             $db->prepare($userRequest, $newUser);
 
-            require ROOT."/App/View/userCreateView.php";
+            $_SESSION['Connected'] = true;
+            $_SESSION['Username'] = $_POST['name'];
+            $_SESSION['Usermail'] = $_POST['mail'];
 
-        }
+            header("Location: index.php?page=home");
+
+        } 
 
         require ROOT."/App/View/userCreateView.php";
+    }
+
+    public function connectUser() 
+    {
+        if($_POST && $_POST['action'] == "connect") {
+
+            
+            $loginData = [
+                
+                "email" => $_POST['connect-mail'],
+
+            ];
+
+            $zizi = $_POST['connect-mail'];
+
+            $db = new Database;
+            
+            $loginRequest = "SELECT * FROM users WHERE user_email = '" . $zizi . "'";
+
+            $exist = $db->query($loginRequest, false);
+
+
+            if(password_verify($_POST['connect-pass'], $exist['user_pass'])) {
+                echo "Bon mdp";
+                
+                $_SESSION['Connected'] = true;
+                $_SESSION['Username'] = $exist['user_name'];
+                $_SESSION['Usermail'] = $exist['user_email'];
+                
+                header("Location: index.php?page=home");
+            } else {
+                echo "<script>alert('Wrong password')</script>";
+            }
+        
+        
+        }
+    }
+
+    public function disconnect() 
+    {
+        if(isset($_GET['action']) && $_GET['action'] == 'disconnect') {
+
+            session_destroy();
+
+            require ROOT."/App/View/userCreateView.php";
+		}
+		
     }
 
 

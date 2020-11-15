@@ -26,8 +26,10 @@ class Database{
 
     public function query(string $statement, bool $one)
     {
-        $query = $this->pdo->query($statement);
-        if ($one === false) {
+        $query = $this->pdo->prepare($statement);
+        $query->execute();
+
+        if ($one == false) {
             return $query->fetch(\PDO::FETCH_ASSOC);
         } else {
             return $query->fetchAll(\PDO::FETCH_ASSOC);

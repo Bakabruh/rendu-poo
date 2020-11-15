@@ -4,8 +4,10 @@ class Survey
 {
     private $title;
     private $responses;
+    private $creationDate;
+    private $creator;
 
-    public function __construct($title, $responses)
+    public function __construct($title, $responses, $creationDate, $creator)
     {
         $this->title = $title;
         $this->responses = $responses;
@@ -13,9 +15,9 @@ class Survey
 
     /**
      * @param string $title
-     * @return $this
+     * @return $this|string
      */
-    public function setTitle(string $title)
+    public function setTitle(string $title) :string
     {
         $this->title = $title;
         return $this;
@@ -31,9 +33,9 @@ class Survey
 
     /**
      * @param array $responses
-     * @return $this
+     * @return $this|array
      */
-    public function setResponses(array $responses)
+    public function setResponses(array $responses) :array
     {
         $this->responses = $responses;
         return $this;
@@ -45,5 +47,41 @@ class Survey
     public function getResponses()
     {
         return $this->responses;
+    }
+
+    /**
+     * @param int $creationDate
+     * @return $this|DateTime
+     */
+    public function setCreationDate(int $creationDate) :DateTime
+    {
+        $this->creationDate = $creationDate;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCreationDate()
+    {
+        return $this->creationDate;
+    }
+
+    /**
+     * @param string $creator
+     * @return $this|string
+     */
+    public function setCreator(string $creator) :string
+    {
+        $this->creator = $creator;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCreator()
+    {
+        return $this->creator;
     }
 }

@@ -2,6 +2,7 @@
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 
+
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <a class="navbar-brand" href="#">SurveySite</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -15,9 +16,17 @@
       <li class="nav-item">
         <a class="nav-link" href="#">Survey</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="?page=create-user&action=disconnect">Log Out</a>
-      </li>
+
+      <?php if(isset($_SESSION["Connected"]) && $_SESSION == true) { ?>
+        <li class="nav-item">
+          <a class="nav-link" href="?page=user"><?= $_SESSION["Username"] ?></a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" href="?page=create-user&action=disconnect">Log Out</a>
+        </li>
+      <?php } ?> 
+      
     </ul>
   </div>
 </nav>

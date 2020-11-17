@@ -24,10 +24,22 @@ require ROOT."/commons.php";
 
     <tr>
         <td>Offline</td>
-        <td><a href="?page=<?= $fr['user_name'] ?>"><?= $fr['user_name'] ?></a></td>
+        <td><a href="?page=user&name=<?= $fr['user_name'] ?>"><?= $fr['user_name'] ?></a></td>
         <td>None</td>
         <td><?= $fr['user_id'] ?></td>
     </tr>
 
     <?php } ?>
 </table>
+
+<hr>
+
+<h2>Demandes d'amis</h2>
+
+<p>A ajouter</p>
+
+<hr>
+
+<h2>Vos sondages</h2>
+
+<p>A ajouter</p>

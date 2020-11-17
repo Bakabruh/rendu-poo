@@ -22,8 +22,15 @@ if(array_key_exists("page", $_GET)){
             break;
 
         case 'user' :
-            $controller = new UserController();
-            $controller->userIndex();
+
+            if(array_key_exists("page", $_GET) && array_key_exists("name", $_GET)) {
+                $controller = new UserController();
+                $controller->visitUser();
+            } else {
+                $controller = new UserController();
+                $controller->userIndex(); 
+            }
+            
             break;
 
         case 'home' :

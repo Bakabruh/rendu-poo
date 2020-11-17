@@ -26,6 +26,19 @@ class UserController {
         require ROOT."/App/View/userIndexView.php";
     }
 
+    public function visitUser()
+    {
+        $viName = $_GET['name'];
+
+        $db = new Database;
+        
+        $visitRequest = "SELECT * FROM users WHERE user_name = '" . $viName . "'";
+
+        $host = $db->query($visitRequest, false);
+
+        require ROOT."/App/View/userVisitView.php";
+    }
+
     
 
     public function createUser() 
@@ -90,11 +103,11 @@ class UserController {
 
             ];
 
-            $zizi = $_POST['connect-mail'];
+            $coMail = $_POST['connect-mail'];
 
             $db = new Database;
             
-            $loginRequest = "SELECT * FROM users WHERE user_email = '" . $zizi . "'";
+            $loginRequest = "SELECT * FROM users WHERE user_email = '" . $coMail . "'";
 
             $exist = $db->query($loginRequest, false);
 

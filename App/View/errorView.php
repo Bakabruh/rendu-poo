@@ -7,4 +7,5 @@ require ROOT."/commons.php";
 
 ?>
 
-<h1>Il n'y a rien ici.. C'est assez gênant..</h1>
+<h1>ERREUR 404</h1>
+<p>Il n'y a rien ici.. C'est assez gênant..</p>

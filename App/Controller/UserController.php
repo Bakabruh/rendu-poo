@@ -8,29 +8,19 @@ use Core\Database;
 
 class UserController {
 
+    public function __construct()
+    {
+        $this->model = new UserModel();
+    }
+
     public function userIndex() 
     {
-        
-        $db = new Database;
-
-        $id = $_SESSION['ID'];
-            
-        $getFriends = 
-        "SELECT users.user_id, users.user_name, users.status  FROM users 
-        INNER JOIN bonds ON user_id1 = '" . $id . "'
-        WHERE users.user_id = bonds.user_id2";
-
-        $friends = $db->query($getFriends, true);
+         
+        $friends = $this->model->getFriends($_SESSION['ID']);
 
         if(isset($_POST['search'])) {
 
-            $nameSearch = $_POST['search'];
-
-            $db = new Database;
-
-            $searchRequest = "SELECT * FROM users WHERE user_name LIKE '%" . $nameSearch . "%'";
-
-            $quest = $db->query($searchRequest, true);
+            $quest = $this->model->searchFriends($_POST['search']);
 
 
             // ESSAYER D'ENLEVER LES AMIS ACTUELS DE LA LISTE DE RECHERCHE
@@ -38,6 +28,8 @@ class UserController {
             // $count = 0;
 
             // foreach($quest as list($a)) {
+
+            //     var_dump($a);
             //     foreach($friends as list($aa)) {
             //         if($a == $aa) {
             //             unset($quest[$count]);
@@ -62,11 +54,9 @@ class UserController {
         $viName = $_GET['name'];
 
         if($viName != "") {
-            $db = new Database;
+            
         
-            $visitRequest = "SELECT * FROM users WHERE user_name = '" . $viName . "'";
-
-            $host = $db->query($visitRequest, false);
+            $host = $this->model->searchFriends($viName);
 
             require ROOT."/App/View/userVisitView.php";
         } else {
@@ -96,24 +86,20 @@ class UserController {
                     "pass" => password_hash($_POST['pass'], PASSWORD_BCRYPT),
                 ];
     
-                $db = new Database();
+                $ver = $this->model->verifCreate();
+
+                var_dump($ver);
     
-                $accVerif = "SELECT * FROM users WHERE user_email ='" . $_POST['mail'] . "' OR user_name = '" . $_POST['name'] . "'";
-    
-                if($db->query($accVerif, false)) {
+                if($ver != []) {
     
                     echo "<script>alert('Nom ou email déjà prit')</script>";
     
                 } else {
-                    $userRequest = "INSERT INTO users (user_name, user_pass, user_email, status) VALUES (:name, :pass, :mail, false)";
                 
-                    $db->prepare($userRequest, $newUser);
-    
-                    $tempoName = $newUser['name'];
-    
-                    $idRequest = "SELECT user_id FROM users WHERE user_name = '" . $tempoName ."'";
-    
-                    $getId = $db->query($idRequest, false);
+                    $this->model->createUser($newUser);
+
+        
+                    $getId = $this->model->getId($newUser['name']);
     
                     $_SESSION['Connected'] = true;
                     $_SESSION['Username'] = $_POST['name'];
@@ -133,21 +119,7 @@ class UserController {
     {
         if($_POST && $_POST['action'] == "connect") {
 
-            
-            $loginData = [
-                
-                "email" => $_POST['connect-mail'],
-
-            ];
-
-            $coMail = $_POST['connect-mail'];
-
-            $db = new Database;
-            
-            $loginRequest = "SELECT * FROM users WHERE user_email = '" . $coMail . "'";
-
-            $exist = $db->query($loginRequest, false);
-
+            $exist = $this->model->connect($_POST['connect-mail']);
 
             if(password_verify($_POST['connect-pass'], $exist['user_pass'])) {
                 echo "Bon mdp";

@@ -47,7 +47,7 @@ require ROOT."/commons.php";
 <h2>Ajout d'amis</h2>
 
     <form action="?page=user&search=on" method="POST">
-        <input type="text" name="search" placeholder="Chercher un utilisateur" <?php if(isset($quest)) { echo 'value="' . $nameSearch . '"';} ?> required>
+        <input type="text" name="search" placeholder="Chercher un utilisateur" <?php if(isset($quest)) { echo 'value="' . $_POST['search'] . '"';} ?> required>
         <button type="submit">Chercher</button>
     </form>
 

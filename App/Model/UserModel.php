@@ -5,112 +5,61 @@ use Core\Database;
 
 class UserModel extends Database{
     
-    private $mail;
 
-    private $name;
-
-    private $pass;
-
-    private $status;
-
-    public function __construct($mail, $name, $pass, $status)
+    public function getFriends($id)
     {
-        $this->mail = $mail;
-        $this->name = $name;
-        $this->pass = $pass;
-        $this->status = $status;
+        $getFriends = 
+        "SELECT users.user_id, users.user_name, users.status  FROM users 
+        INNER JOIN bonds ON user_id1 = '" . $id . "'
+        WHERE users.user_id = bonds.user_id2";
+
+        return $this->query($getFriends, true);
+
+        
     }
 
-    /**
-     * Get the value of mail
-     */ 
-    public function getMail()
+    public function searchFriends($ns) 
     {
-        return $this->mail;
+
+        $searchRequest = "SELECT * FROM users WHERE user_name LIKE '%" . $ns . "%'";
+
+        return $this->query($searchRequest, true);
     }
 
-    /**
-     * Set the value of mail
-     *
-     * @return  self
-     */ 
-    public function setMail($mail)
+    public function visitName($viName)
     {
-        $this->mail = $mail;
+        $visitRequest = "SELECT * FROM users WHERE user_name = '" . $viName . "'";
 
-        return $this;
+        return $this->query($visitRequest, false);
     }
 
-    /**
-     * Get the value of name
-     */ 
-    public function getName()
+    public function verifCreate()
     {
-        return $this->name;
+        $accVerif = "SELECT * FROM users WHERE user_email ='" . $_POST['mail'] . "' OR user_name = '" . $_POST['name'] . "'";
+
+        return $this->query($accVerif, false);
     }
 
-    /**
-     * Set the value of name
-     *
-     * @return  self
-     */ 
-    public function setName($name)
+    public function createUser(array $nu)
     {
-        $this->name = $name;
-
-        return $this;
+        $userRequest = "INSERT INTO users (user_name, user_pass, user_email, status) VALUES (:name, :pass, :mail, false)";
+                
+        return $this->prepare($userRequest, $nu);
+        
     }
 
-    /**
-     * Get the value of pass
-     */ 
-    public function getPass()
+    public function getId($tmp)
     {
-        return $this->pass;
+        $idRequest = "SELECT user_id FROM users WHERE user_name = '" . $tmp ."'";
+
+        return $this->query($idRequest, false);
     }
 
-    /**
-     * Set the value of pass
-     *
-     * @return  self
-     */ 
-    public function setPass($pass)
+    public function connect($coMail)
     {
-        $this->pass = $pass;
+        $loginRequest = "SELECT * FROM users WHERE user_email = '" . $coMail . "'";
 
-        return $this;
+        return $this->query($loginRequest, false);
     }
-
-    /**
-     * Get the value of status
-     */ 
-    public function getStatus()
-    {
-        return $this->status;
-    }
-
-    /**
-     * Set the value of status
-     *
-     * @return  self
-     */ 
-    public function setStatus($status)
-    {
-        $this->status = $status;
-
-        return $this;
-    }
-
-    public function getUsers()
-    {
-        $query = $this->pdo->query("SELECT * FROM users");
-        return $query->fetchAll(\PDO::FETCH_OBJ);
-    }
-
-    public function createArray()
-    {
-        return [$this->mail, $this->name, $this->pass, $this->status];
-    }
-
 
 }

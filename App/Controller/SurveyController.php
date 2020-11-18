@@ -9,7 +9,7 @@ class surveyController
         $this->model = new Survey();
     }
 
-    public function renderIndex()
+    public function renderCreation()
     {
         $survey = $this->model->query("SELECT * FROM polls");
         require ROOT."/surveyIndexView.php";

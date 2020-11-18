@@ -16,13 +16,14 @@ class UserController {
         $id = $_SESSION['ID'];
             
         $getFriends = 
-        "SELECT users.user_name, users.status, users.user_id FROM users 
+        "SELECT users.user_id, users.user_name, users.status  FROM users 
         INNER JOIN bonds ON user_id1 = '" . $id . "'
         WHERE users.user_id = bonds.user_id2";
 
         $friends = $db->query($getFriends, true);
 
         if(isset($_POST['search'])) {
+
             $nameSearch = $_POST['search'];
 
             $db = new Database;
@@ -30,6 +31,23 @@ class UserController {
             $searchRequest = "SELECT * FROM users WHERE user_name LIKE '%" . $nameSearch . "%'";
 
             $quest = $db->query($searchRequest, true);
+
+
+            // ESSAYER D'ENLEVER LES AMIS ACTUELS DE LA LISTE DE RECHERCHE
+
+            // $count = 0;
+
+            // foreach($quest as list($a)) {
+            //     foreach($friends as list($aa)) {
+            //         if($a == $aa) {
+            //             unset($quest[$count]);
+            //         }
+            //     }
+            //     $count++;
+            // }
+
+            
+            
 
         }
 

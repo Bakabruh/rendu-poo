@@ -15,9 +15,6 @@
     margin: auto;
   }
 
-  table {
-    
-  }
 
 </style>
 

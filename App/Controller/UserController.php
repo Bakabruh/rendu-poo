@@ -22,21 +22,40 @@ class UserController {
 
         $friends = $db->query($getFriends, true);
 
+        if(isset($_POST['search'])) {
+            $nameSearch = $_POST['search'];
+
+            $db = new Database;
+
+            $searchRequest = "SELECT * FROM users WHERE user_name LIKE '%" . $nameSearch . "%'";
+
+            $quest = $db->query($searchRequest, true);
+
+        }
+
 
         require ROOT."/App/View/userIndexView.php";
     }
+
+    
 
     public function visitUser()
     {
         $viName = $_GET['name'];
 
-        $db = new Database;
+        if($viName != "") {
+            $db = new Database;
         
-        $visitRequest = "SELECT * FROM users WHERE user_name = '" . $viName . "'";
+            $visitRequest = "SELECT * FROM users WHERE user_name = '" . $viName . "'";
 
-        $host = $db->query($visitRequest, false);
+            $host = $db->query($visitRequest, false);
 
-        require ROOT."/App/View/userVisitView.php";
+            require ROOT."/App/View/userVisitView.php";
+        } else {
+            require ROOT."/App/View/errorView.php";
+        }
+
+        
     }
 
     

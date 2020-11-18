@@ -112,4 +112,5 @@ class UserModel extends Database{
         return [$this->mail, $this->name, $this->pass, $this->status];
     }
 
+
 }

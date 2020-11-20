@@ -1,9 +1,16 @@
-<?php
+<?php 
 
-    use App\Controller\surveyController;
+define("ROOT", dirname(__DIR__));
 
-    define("ROOT", dirname(__DIR__));
-    require ROOT."/Autoloader.php";
-    Autoloader::register();
+session_start();
 
-    require ROOT."/router.php";
+require ROOT."/Core/Database.php";
+
+
+
+
+
+require ROOT."/vendor/autoload.php";
+// Autoloader::register();
+
+require ROOT."/router.php";

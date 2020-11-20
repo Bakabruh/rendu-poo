@@ -28,17 +28,14 @@ class Database{
     {
         $query = $this->pdo->query($statement);
         if ($one === false) {
-            return $query->fetch(\PDO::FETCH_ASSOC);
+            return $query->fetch(\PDO::FETCH_OBJ);
         } else {
-            return $query->fetchAll(\PDO::FETCH_ASSOC);
+            return $query->fetchAll(\PDO::FETCH_OBJ);
         }
     }
 
     public function prepare(string $statement, array $data = array())
     {
-
-        var_dump($this->pdo);
-        // die();
         $prepare = $this->pdo->prepare($statement);
         $prepare->execute($data);
     }

@@ -2,16 +2,18 @@
 
 namespace App\Controller;
 use App\Model\SurveyModel;
+use Core\Database;
 
 class surveyController
 {
-    public function __construct() {
-        $this->model = new Survey();
-    }
-
-    public function renderCreation()
+    public function createSurvey()
     {
-        $survey = $this->model->query("SELECT * FROM polls");
-        require ROOT."/surveyIndexView.php";
+
+        $db = new Database;
+
+        $getCreation = "SELECT * FROM create-poll";
+
+        $creation = $db->query($getCreation, true);
+
     }
 }

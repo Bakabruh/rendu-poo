@@ -24,19 +24,22 @@ class Database{
         }
     }
 
-    public function query(string $statement, bool $bin)
+    public function query(string $statement, bool $one)
     {
-        $query = $this->pdo->query($statement);
-        if ($bin === false) {
-            return $query->fetch(\PDO::FETCH_OBJ);
+        $query = $this->pdo->prepare($statement);
+        $query->execute();
+
+        if ($one == false) {
+            return $query->fetch(\PDO::FETCH_ASSOC);
         } else {
-            return $query->fetchAll(\PDO::FETCH_OBJ);
+            return $query->fetchAll(\PDO::FETCH_ASSOC);
         }
     }
 
     public function prepare(string $statement, array $data = array())
     {
-        $prepare = $$this->pdo->prepare($statement);
+
+        $prepare = $this->pdo->prepare($statement);
         $prepare->execute($data);
     }
 }

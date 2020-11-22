@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.4
+-- version 5.0.2
 -- https://www.phpmyadmin.net/
 --
--- Hôte : localhost:3306
--- Généré le : ven. 13 nov. 2020 à 17:21
--- Version du serveur :  5.7.24
--- Version de PHP : 7.2.19
+-- Host: localhost:3306
+-- Generation Time: Nov 22, 2020 at 10:15 PM
+-- Server version: 5.7.24
+-- PHP Version: 7.2.19
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,13 +18,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de données : `poll-poo`
+-- Database: `poll-poo`
 --
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `bonds`
+-- Table structure for table `bonds`
 --
 
 CREATE TABLE `bonds` (
@@ -33,10 +33,17 @@ CREATE TABLE `bonds` (
   `user_id2` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Dumping data for table `bonds`
+--
+
+INSERT INTO `bonds` (`bonds_id`, `user_id1`, `user_id2`) VALUES
+(1, 28, 29);
+
 -- --------------------------------------------------------
 
 --
--- Structure de la table `comments`
+-- Table structure for table `comments`
 --
 
 CREATE TABLE `comments` (
@@ -47,26 +54,39 @@ CREATE TABLE `comments` (
 -- --------------------------------------------------------
 
 --
--- Structure de la table `polls`
+-- Table structure for table `polls`
 --
 
 CREATE TABLE `polls` (
-  `id` int(11) NOT NULL,
-  `creatorsId` int(11) NOT NULL,
-  `creatorId` int(11) NOT NULL,
-  `commentsId` int(11) NOT NULL,
-  `rep1` varchar(255) NOT NULL,
-  `rep2` varchar(255) NOT NULL,
-  `rep3` varchar(255) DEFAULT NULL,
-  `rep4` varchar(255) DEFAULT NULL,
+  `poll_id` int(11) NOT NULL,
+  `poll-title` int(11) NOT NULL,
+  `reponses_Number` int(11) NOT NULL,
+  `reponse1` varchar(255) NOT NULL,
+  `reponse2` varchar(255) NOT NULL,
+  `reponse3` varchar(255) DEFAULT NULL,
+  `reponse4` varchar(255) DEFAULT NULL,
   `creationDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `endDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `endDate` timestamp NOT NULL,
+  `creatorsId` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `users`
+-- Table structure for table `requests`
+--
+
+CREATE TABLE `requests` (
+  `request_id` int(11) NOT NULL,
+  `user_1_id` int(11) NOT NULL,
+  `user_2_id` int(11) NOT NULL,
+  `state` tinyint(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `users`
 --
 
 CREATE TABLE `users` (
@@ -74,15 +94,25 @@ CREATE TABLE `users` (
   `user_name` varchar(255) NOT NULL,
   `user_pass` varchar(255) NOT NULL,
   `user_email` varchar(255) NOT NULL,
-  `status` varchar(255) NOT NULL
+  `status` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Index pour les tables déchargées
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`user_id`, `user_name`, `user_pass`, `user_email`, `status`) VALUES
+(28, 'Nisouc', '$2y$10$EkVmiwRVVN9T.v4zbewyDupSWweqTrO7iLTHaFMXJkbbz9k/.tiTa', 'Nisouc@outlook.com', 0),
+(29, 'test', '$2y$10$dsu1Uz0f3BvLnrPtAGIJ1upKw1xroQUc2p78ay3ZSzbldaaM0KyXO', 'test@test.fr', 0),
+(30, 'essai', '$2y$10$3BzdX.08GQTjVgL1DbejTuF1cUbXzwFCWAI2BjNLgFoyFkj.FaHDm', 'essai@essai.fr', 0),
+(31, 'ttt', '$2y$10$Y2LrEJ.QNDn0sY81sNFTZObbA3ZBxistiUCog4NT/hyuSvsVXcmGm', 'ttt@ttt.fr', 0);
+
+--
+-- Indexes for dumped tables
 --
 
 --
--- Index pour la table `bonds`
+-- Indexes for table `bonds`
 --
 ALTER TABLE `bonds`
   ADD PRIMARY KEY (`bonds_id`),
@@ -90,52 +120,75 @@ ALTER TABLE `bonds`
   ADD KEY `user_id1` (`user_id1`);
 
 --
--- Index pour la table `comments`
+-- Indexes for table `comments`
 --
 ALTER TABLE `comments`
   ADD PRIMARY KEY (`survey_id`);
 
 --
--- Index pour la table `users`
+-- Indexes for table `polls`
+--
+ALTER TABLE `polls`
+  ADD PRIMARY KEY (`poll_id`);
+
+--
+-- Indexes for table `requests`
+--
+ALTER TABLE `requests`
+  ADD PRIMARY KEY (`request_id`);
+
+--
+-- Indexes for table `users`
 --
 ALTER TABLE `users`
-  ADD PRIMARY KEY (`user_id`);
+  ADD PRIMARY KEY (`user_id`),
+  ADD UNIQUE KEY `user_email` (`user_email`);
 
 --
--- AUTO_INCREMENT pour les tables déchargées
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT pour la table `bonds`
+-- AUTO_INCREMENT for table `bonds`
 --
 ALTER TABLE `bonds`
-  MODIFY `bonds_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `bonds_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT pour la table `comments`
+-- AUTO_INCREMENT for table `comments`
 --
 ALTER TABLE `comments`
   MODIFY `survey_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT pour la table `users`
+-- AUTO_INCREMENT for table `polls`
+--
+ALTER TABLE `polls`
+  MODIFY `poll_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `requests`
+--
+ALTER TABLE `requests`
+  MODIFY `request_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
--- Contraintes pour les tables déchargées
+-- Constraints for dumped tables
 --
 
 --
--- Contraintes pour la table `bonds`
+-- Constraints for table `bonds`
 --
 ALTER TABLE `bonds`
   ADD CONSTRAINT `bonds_ibfk_1` FOREIGN KEY (`user_id1`) REFERENCES `users` (`user_id`),
   ADD CONSTRAINT `bonds_ibfk_2` FOREIGN KEY (`user_id2`) REFERENCES `users` (`user_id`);
 COMMIT;
-
-ALTER TABLE `users` CHANGE `status` `status` BOOLEAN NOT NULL;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

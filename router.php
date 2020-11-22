@@ -9,7 +9,7 @@ if (array_key_exists('page', $_GET)) {
         case 'createSurvey':
             $controller->renderCreation();
             break;
-        default:
+        case 'home':
             $controller->renderIndex();
     }
 }

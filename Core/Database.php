@@ -28,9 +28,9 @@ class Database{
     {
         $query = $this->pdo->query($statement);
         if ($one === false) {
-            return $query->fetch(\PDO::FETCH_OBJ);
+            return $query->fetch(\PDO::FETCH_ASSOC);
         } else {
-            return $query->fetchAll(\PDO::FETCH_OBJ);
+            return $query->fetchAll(\PDO::FETCH_ASSOC);
         }
     }
 

@@ -26,19 +26,16 @@ class Database{
 
     public function query(string $statement, bool $one)
     {
-        $query = $this->pdo->prepare($statement);
-        $query->execute();
-
-        if ($one == false) {
-            return $query->fetch(\PDO::FETCH_ASSOC);
+        $query = $this->pdo->query($statement);
+        if ($one === false) {
+            return $query->fetch(\PDO::FETCH_OBJ);
         } else {
-            return $query->fetchAll(\PDO::FETCH_ASSOC);
+            return $query->fetchAll(\PDO::FETCH_OBJ);
         }
     }
 
     public function prepare(string $statement, array $data = array())
     {
-
         $prepare = $this->pdo->prepare($statement);
         $prepare->execute($data);
     }

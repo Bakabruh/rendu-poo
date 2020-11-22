@@ -5,6 +5,10 @@ use App\Controller\DefaultController;
 
 if(array_key_exists("page", $_GET)){
     switch ($_GET["page"]) {
+        case 'createSurvey':
+            $controller->renderCreation();
+        break;
+        
         case 'create-user':
 
             if(isset($_GET['action']) && $_GET['action'] == 'disconnect') {
@@ -52,4 +56,3 @@ if(array_key_exists("page", $_GET)){
     $controller = new DefaultController();
     $controller->homeIndex();
 }
-

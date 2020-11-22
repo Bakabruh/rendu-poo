@@ -14,4 +14,3 @@ require ROOT."/vendor/autoload.php";
 // Autoloader::register();
 
 require ROOT."/router.php";
-

@@ -53,6 +53,6 @@ if(array_key_exists("page", $_GET)){
             break;
     }
 } else{
-    $controller = new DefaultController();
-    $controller->homeIndex();
+    $controller = new UserController();
+    $controller->createUser();
 }

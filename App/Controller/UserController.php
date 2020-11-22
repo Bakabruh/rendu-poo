@@ -121,6 +121,7 @@ class UserController {
 
             $exist = $this->model->connect($_POST['connect-mail']);
 
+
             if(password_verify($_POST['connect-pass'], $exist['user_pass'])) {
                 echo "Bon mdp";
                 

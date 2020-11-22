@@ -1,7 +1,17 @@
 <?php 
 
-    define("ROOT", dirname(__DIR__));
-    require ROOT."/Autoloader.php";
-    Autoloader::register();
+define("ROOT", dirname(__DIR__));
 
-    require ROOT."/router.php";
+session_start();
+
+require ROOT."/Core/Database.php";
+
+
+
+
+
+require ROOT."/vendor/autoload.php";
+// Autoloader::register();
+
+require ROOT."/router.php";
+

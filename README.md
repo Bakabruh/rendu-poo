@@ -1,9 +1,9 @@
 # Installer le projet sur sa machine
 
-Aller dans `Core/Config` 
-Créer le fichier `config.php` en copiant le code de `config.example.php` 
-Remplacer les champs avec les informations de votre propre installation. 
+Aller dans `Core/Config/config.example.php` et remplacer les informations avec celles de votre propre installation. 
+<br>
+Renommer ensuite le fichier en `config.php`
+<br>
+Faire un `composer install`
 
-# Idée de template pour les sondages
-
-https://www.surveyjs.io/Examples/Library?id=questiontype-checkbox&platform=jQuery&theme=modern
+Nb : La liste des comptes créés sur le site pour testing est dans `info_dump.json`, merci de la garder à jour

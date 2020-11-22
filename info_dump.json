@@ -24,6 +24,12 @@
                 "user_name": "ttt",
                 "user_email": "ttt@ttt.fr",
                 "pass": "ttt"
+            },
+            "5": {
+                "user_id": "32",
+                "user_name": "Tom Louveau",
+                "user_email": "chewie.louveau@gmail.com",
+                "pass": "diablo2001"
             }
         }
         

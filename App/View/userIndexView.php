@@ -44,6 +44,50 @@ require ROOT."/commons.php";
 
 <hr>
 
+<h2>Demandes d'amis</h2>
+
+<?php if (isset($fReqs)) { ?>
+
+<table class="table">
+        <thead class="thead-dark">
+    <tr>
+        <th scope="col">Pseudo</th>
+        <th scope="col">Ajouter ?</th>
+    </tr>
+
+    <?php foreach($fReqs as $fq) { ?>
+
+    <tr>
+        <td><a href="?page=user&name=<?= $fq['user_name'] ?>"><?= $fq['user_name'] ?></a></td>
+        
+        <td> 
+            <form action="?page=user" method="POST"> 
+                <input type="hidden" name="accept" value="<?= $fq['request_id'] ?>">
+                <input type="hidden" name="id1" value="<?= $fq['user_1_id'] ?>">
+                <button type="submit">Ajouter</button>
+            </form>
+
+            <form action="?page=user" method="POST"> 
+                <input type="hidden" name="decline" value="<?= $fq['request_id'] ?>">
+                <input type="hidden" name="id1" value="<?= $fq['user_1_id'] ?>">
+                <button type="submit">Refuser</button>
+            </form>    
+        </td>
+            
+    </tr>
+
+    <?php } 
+    } else { ?>
+
+    <p>C'est vide par ici</p>
+
+    <?php } ?>
+
+</table>
+
+
+<hr>
+
 <h2>Ajout d'amis</h2>
 
     <form action="?page=user&search=on" method="POST">
@@ -86,7 +130,10 @@ require ROOT."/commons.php";
 
         <?php } else { ?>
             <td>
-                <form action="" method="POST">
+                <form action="?page=user" method="POST">
+                
+                    <input type="hidden" name="rq_user_name" value="<?= $rq['user_name'] ?>">
+                    <input type="hidden" name="rq_user_id" value="<?= $rq['user_id'] ?>">
                     <button type="submit">Ajouter</button>
                 </form>
             </td>
@@ -99,6 +146,8 @@ require ROOT."/commons.php";
     
 
 <?php } ?>
+
+
 
 <hr>
 

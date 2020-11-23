@@ -18,11 +18,25 @@ class UserController {
          
         $friends = $this->model->getFriends($_SESSION['ID']);
 
+
+        foreach ($friends as $fr) {
+            if ($fr['user_id'] == $_SESSION['ID']) {
+
+                $test = array_search($fr, $friends);
+                array_splice($friends, $test, 1);
+                
+            }
+
+        }
+        
+
+        // var_dump($friends);
+
+        $fReqs = $this->model->getReqs($_SESSION['ID']);
+
         if(isset($_POST['search'])) {
 
             $quest = $this->model->searchFriends($_POST['search']);
-
-
             // ESSAYER D'ENLEVER LES AMIS ACTUELS DE LA LISTE DE RECHERCHE
 
             // $count = 0;
@@ -37,13 +51,7 @@ class UserController {
             //     }
             //     $count++;
             // }
-
-            
-            
-
         }
-
-
         require ROOT."/App/View/userIndexView.php";
     }
 
@@ -52,34 +60,22 @@ class UserController {
     public function visitUser()
     {
         $viName = $_GET['name'];
-
         if($viName != "") {
-            
-        
             $host = $this->model->searchFriends($viName);
-
             require ROOT."/App/View/userVisitView.php";
         } else {
             require ROOT."/App/View/errorView.php";
         }
-
-        
     }
 
     
 
     public function createUser() 
     {
-
         if($_POST && $_POST['action'] == "create") {
-
-
             if($_POST['pass'] != $_POST['pass2']) {
-
                 echo "<script>alert('Écrivez deux fois le même mot de passe')</script>";
-
             } else {
-
                 $newUser = [
                     "mail" => $_POST['mail'],
                     "name" => $_POST['name'],
@@ -148,6 +144,51 @@ class UserController {
             require ROOT."/App/View/userCreateView.php";
 		}
 		
+    }
+
+    public function sendRequest()
+    {
+
+        $fR = [
+            "id1" => $_SESSION['ID'],
+            "id2" => $_POST['rq_user_id']
+        ];
+
+        $this->model->addFriend($fR);
+
+        echo "<script>alert('Demande d'amis envoyée à " . $_POST['rq_user_name'] . "')</script>";
+
+        header("Location: index.php?page=user");
+    }
+
+    public function treatRequest()
+    {
+        $id1 = $_POST['id1'];
+        $id2 = $_SESSION['ID'];
+        $id3 = $_POST['accept'];
+
+        if (isset($_POST['accept'])) {
+
+            $id3 = $_POST['accept'];
+            $choice = true;
+            $this->model->treatReq($choice, $id1, $id2, $id3);
+
+            header("Location: index.php?page=user");
+
+            
+
+        } else if (isset($_POST['decline'])) {
+
+            $id3 = $_POST['decline']; 
+            $choice = false;
+            $this->model->treatReq($choice, $id1, $id2, $id3);
+
+            header("Location: index.php?page=user");
+
+        } else {
+            header("Location: index.php?page=user");
+            echo "<script>alert('Il y a eu un problème, réessayez')</script>";
+        }
     }
 
 

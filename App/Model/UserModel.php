@@ -90,4 +90,10 @@ class UserModel extends Database{
         }
     }
 
+    public function delFriend($idF, $idU)
+    {
+        $del = "DELETE FROM bonds WHERE user_id1 = '" . $idF ."' AND user_id2 = '" . $idU ."' OR user_id2 = '" . $idF ."' AND user_id1 = '" . $idU ."'";
+        return $this->prepare($del, []);
+    }
+
 }

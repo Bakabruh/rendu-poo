@@ -20,6 +20,7 @@ class UserController {
 
 
         foreach ($friends as $fr) {
+
             if ($fr['user_id'] == $_SESSION['ID']) {
 
                 $test = array_search($fr, $friends);
@@ -30,8 +31,6 @@ class UserController {
         }
         
 
-        // var_dump($friends);
-
         $fReqs = $this->model->getReqs($_SESSION['ID']);
 
         if(isset($_POST['search'])) {
@@ -39,18 +38,20 @@ class UserController {
             $quest = $this->model->searchFriends($_POST['search']);
             // ESSAYER D'ENLEVER LES AMIS ACTUELS DE LA LISTE DE RECHERCHE
 
-            // $count = 0;
+            $count = 0;
 
-            // foreach($quest as list($a)) {
+            foreach ($quest as $a) {
 
-            //     var_dump($a);
-            //     foreach($friends as list($aa)) {
-            //         if($a == $aa) {
-            //             unset($quest[$count]);
-            //         }
-            //     }
-            //     $count++;
-            // }
+                // var_dump($a);
+                foreach($friends as $aa) {
+                    if($a['user_id'] == $aa['user_id']) {
+                        $hide= array_search($a, $quest);
+                        // var_dump($a['user_id']);
+                        array_splice($quest, $hide, 1);
+                    }
+                }
+                $count++;
+            }
         }
         require ROOT."/App/View/userIndexView.php";
     }
@@ -189,6 +190,14 @@ class UserController {
             header("Location: index.php?page=user");
             echo "<script>alert('Il y a eu un problème, réessayez')</script>";
         }
+    }
+
+    public function deleteFriend()
+    {
+        $id1 = $_POST['delete'];
+        $id2 = $_SESSION['ID'];
+
+        $this->model->delFriend($id1, $id2);
     }
 
 

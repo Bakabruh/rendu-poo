@@ -2,7 +2,7 @@
 
 use App\Controller\SurveyController;
 
-require ROOT."/bootsraplink.html"; ?>
+require ROOT."/bootstraplink.html"; ?>
 
 <!DOCTYPE html>
 <html lang="en">

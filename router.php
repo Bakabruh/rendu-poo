@@ -36,6 +36,10 @@ if(array_key_exists("page", $_GET)){
             } else if(isset($_POST['accept']) || isset($_POST['decline'])) {
                 $controller = new UserController();
                 $controller->treatRequest();
+                $controller->userIndex();
+            } else if(isset($_POST['delete'])) {
+                $controller = new UserController();
+                $controller->deleteFriend(); 
                 $controller->userIndex(); 
             } else {
                 $controller = new UserController();

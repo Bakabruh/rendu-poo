@@ -2,7 +2,10 @@
 
 define("ROOT", dirname(__DIR__));
 
+
 session_start();
+
+
 
 require ROOT."/Core/Database.php";
 

@@ -1,0 +1,30 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+width: 90%;
+margin: auto;
+}
+
+.colorForm > label:nth-of-type(2) {
+    background-color: white;
+}
+
+.colorForm > label:nth-of-type(3) {
+    background-color: aquamarine;
+}
+
+.colorForm > label:nth-of-type(4) {
+    background-color: bisque;
+}
+
+.colorForm > label:nth-of-type(5) {
+    background-color: chocolate;
+}
+
+.colorForm > label:nth-of-type(6) {
+    background-color: dimgrey;
+}

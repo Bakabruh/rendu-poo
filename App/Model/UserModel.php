@@ -64,6 +64,12 @@ class UserModel extends Database{
         return $this->query($loginRequest, false);
     }
 
+    public function veriFriend(array $fR)
+    {
+        $veri = "SELECT * FROM requests WHERE user_1_id = '" . $fR['id1'] ."' AND user_2_id = '" . $fR['id2'] ."' OR user_2_id = '" . $fR['id1'] ."' AND user_1_id = '" . $fR['id2']."'";
+        return $this->query($veri, false);
+    }
+
     public function addFriend(array $fR)
     {
         $friendRequest = "INSERT INTO requests (user_1_id, user_2_id, state) VALUES (:id1, :id2, 0)";
@@ -94,6 +100,30 @@ class UserModel extends Database{
     {
         $del = "DELETE FROM bonds WHERE user_id1 = '" . $idF ."' AND user_id2 = '" . $idU ."' OR user_id2 = '" . $idF ."' AND user_id1 = '" . $idU ."'";
         return $this->prepare($del, []);
+    }
+
+    public function getName($name)
+    {
+        $passRequest = "SELECT * FROM users WHERE user_name = '" . $name . "'";
+        return $this->query($passRequest, false);
+    }
+
+    public function verifChange($new)
+    {
+        $Verif = "SELECT * FROM users WHERE user_name ='" . $new . "'";
+        return $this->query($Verif, false);
+    }
+
+    public function newName($name)
+    {
+        $change = "UPDATE users SET user_name = '" . $name . "' WHERE user_id ='" . $_SESSION['ID'] . "'";
+        return $this->prepare($change, []);
+    }
+
+    public function newColor($col)
+    {
+        $change = "UPDATE users SET user_theme = '" . $col . "' WHERE user_id ='" . $_SESSION['ID'] . "'";
+        return $this->prepare($change, []);
     }
 
 }

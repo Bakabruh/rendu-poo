@@ -36,21 +36,16 @@ class UserController {
         if(isset($_POST['search'])) {
 
             $quest = $this->model->searchFriends($_POST['search']);
-            // ESSAYER D'ENLEVER LES AMIS ACTUELS DE LA LISTE DE RECHERCHE
-
-            $count = 0;
-
+            
+            //ENLEVER LES AMIS ACTUELS DE LA LISTE DE RECHERCHE
             foreach ($quest as $a) {
 
-                // var_dump($a);
                 foreach($friends as $aa) {
                     if($a['user_id'] == $aa['user_id']) {
                         $hide= array_search($a, $quest);
-                        // var_dump($a['user_id']);
                         array_splice($quest, $hide, 1);
                     }
                 }
-                $count++;
             }
         }
         require ROOT."/App/View/userIndexView.php";
@@ -101,6 +96,7 @@ class UserController {
                     $_SESSION['Connected'] = true;
                     $_SESSION['Username'] = $_POST['name'];
                     $_SESSION['Usermail'] = $_POST['mail'];
+                    $_SESSION['theme'] = "white";
                     $_SESSION['ID'] = $getId;
     
                     header("Location: index.php?page=home");
@@ -126,6 +122,7 @@ class UserController {
                 $_SESSION['Username'] = $exist['user_name'];
                 $_SESSION['Usermail'] = $exist['user_email'];
                 $_SESSION['ID'] = $exist['user_id'];
+                $_SESSION['theme'] = $exist['user_theme'];
                 
                 header("Location: index.php?page=home");
             } else {
@@ -155,11 +152,19 @@ class UserController {
             "id2" => $_POST['rq_user_id']
         ];
 
-        $this->model->addFriend($fR);
+        $verif = $this->model->veriFriend($fR);
+        if ($verif == false) {
+            $this->model->addFriend($fR);
+        }
 
-        echo "<script>alert('Demande d'amis envoyée à " . $_POST['rq_user_name'] . "')</script>";
+        
+
+        
+
 
         header("Location: index.php?page=user");
+        // echo "<script>alert('Demande d'amis envoyée à " . $_POST['rq_user_name'] . "')</script>";
+
     }
 
     public function treatRequest()
@@ -198,6 +203,40 @@ class UserController {
         $id2 = $_SESSION['ID'];
 
         $this->model->delFriend($id1, $id2);
+    }
+
+
+    public function newName()
+    {
+        $newname = $_POST['newname'];
+        $verif = $_POST['newnamepass'];
+
+        $ver = $this->model->verifChange($newname);
+
+        if($ver != []) {
+            echo "<script>alert('Nom déjà prit')</script>";
+        } else {
+            $getPass = $this->model->getName($_SESSION['Username']);
+
+            if (password_verify($verif, $getPass['user_pass'])) {
+                
+                $this->model->newName($newname);
+
+                $_SESSION['Username'] = $newname;
+            } else {
+                echo "<script>alert('Mauvais mot de passe')</script>";
+            }
+        }
+
+    }
+
+    public function newColor()
+    {
+        $color = $_POST['color'];
+
+        $this->model->newColor($color);
+
+        $_SESSION['theme'] = $color;
     }
 
 

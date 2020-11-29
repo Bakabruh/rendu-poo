@@ -11,6 +11,12 @@ require ROOT."/commons.php";
 
     <hr>
 
+    <h2>Vos sondages</h2>
+
+    <p>A ajouter</p>
+
+    <hr>
+
     <section>
 
         <h2>Liste d'amis</h2>
@@ -166,9 +172,46 @@ require ROOT."/commons.php";
     
     <hr>
 
-    <h2>Vos sondages</h2>
+    <h2>Modification du profil</h2>
 
-    <p>A ajouter</p>
+    <form action="?page=user" method="POST">
+        <label>Vous voulez changer de nom ?</label>
+        <input type="text" placeholder="Nouveau nom.." name="newname" required>
+        <br>
+        <label>Écrivez votre mot de passe pour continuer</label>
+        <input type="password" placeholder="Mot de passe.." name="newnamepass" required>
+        <br>
+        <button type="submit">Changer de nom</button>
+    </form>
+
+    <br><br><br>
+
+    <form action="?page=user" method="POST" class="colorForm">
+        <label>Changer le couleur de fond ?</label>
+        <br>
+
+        <input type="radio" id="color1" name="color" value="white" checked>
+        <label for="color1">Blanc</label>
+        <br>
+
+        <input type="radio" id="color2" name="color" value="aquamarine">
+        <label for="color2">Aquamarine</label>
+        <br>
+
+        <input type="radio" id="color3" name="color" value="bisque">
+        <label for="color3">Bisque</label>
+        <br>
+
+        <input type="radio" id="color4" name="color" value="chocolate">
+        <label for="color4">Chocolat</label>
+        <br>
+
+        <input type="radio" id="color5" name="color" value="dimgrey">
+        <label for="color5">Gris</label>
+        <br>
+
+        <button type="submit">Changer la couleur</button>
+    </form>
 
     <script src="/assets/js/UserPage.js"></script>
 </body>

@@ -31,10 +31,10 @@ class SurveyModel extends Database
         return $this->query($msg, true);
     }
 
-    public function postMess(array $gm)
+    public function postMess($newmsg)
     {
-        $postMsg = "INSERT INTO comments(author, content, created_at) VALUES(:author, :content, NOW())";
+        $postMsg = "INSERT INTO comments(author, content) VALUES(:author, :content)";
 
-        return $this->prepare($postMsg, $gm);
+        return $this->prepare($postMsg, $newmsg);
     }
 }

@@ -31,8 +31,8 @@ require ROOT."/commons.php";
         </div>
 
         <div class="user-Inputs">
-            <form action="?task" method="POST">
-                <input type="text" name="author" id="author" placeholder="Username">
+            <form action="?page=write" method="POST">
+                <input type="hidden" name="author" id="author" value="<?= $_SESSION['Username'] ?>">
                 <input type="text" name="content" id="content" placeholder="Message">
                 <button type="submit">Send</button>
             </form>
@@ -45,7 +45,7 @@ require ROOT."/commons.php";
     function showMessage() {
 
         $.ajax({
-            url: "index.php?task",
+            url: "index.php?page=write",
             datatype: json,
             success: function(response) {
                 response.foreach(message => {
@@ -61,12 +61,13 @@ require ROOT."/commons.php";
 
         $("button").click(function(e){
             e.preventDefault();
+            let author = $('#author').val();
             let content = $("#content").val();
             $.ajax({
-                url:"index.php?task=write",
+                url:"index.php?page=write",
                 method:"POST",
                 dataType:"json",
-                data:{content},
+                data:{author, content},
                 success:function(response){
                     showMessages();
                 }

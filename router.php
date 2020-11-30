@@ -6,6 +6,14 @@ use App\Controller\surveyController;
 
 if(array_key_exists("page", $_GET)){
     switch ($_GET["page"]) {
+        case 'write':
+            if(isset($_SESSION['Connected']) && $_SESSION['Connected'] == true) {
+                $controller = new surveyController();
+                $controller->postMessages();
+                $controller = new surveyController();
+                $controller->getMessages();
+            }
+            break;
 
         // route vers la page de création de sondages
         case 'createSurvey':

@@ -25,8 +25,10 @@ require ROOT."/commons.php";
             </div>
         </div>
 
-        <div id="msg-author"></div>
-        <div id="msg-received"></div>
+        <div class="msg-delivered-container">
+            <div id="msg-author"></div>
+            <div id="msg-received"></div>
+        </div>
 
         <div class="user-Inputs">
             <form action="?task" method="POST">
@@ -40,7 +42,7 @@ require ROOT."/commons.php";
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
     <script>
     
-    function getMessage() {
+    function showMessage() {
 
         $.ajax({
             url: "index.php?task",
@@ -66,7 +68,7 @@ require ROOT."/commons.php";
                 dataType:"json",
                 data:{content},
                 success:function(response){
-                    getMessages();
+                    showMessages();
                 }
             })
         })

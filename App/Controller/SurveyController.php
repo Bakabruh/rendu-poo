@@ -14,18 +14,19 @@ class surveyController
 
     public function renderCreation()
     {
-        if(isset($_POST['poll-title']) && isset($_POST['questionsNumber'])) {
+        if(isset($_POST['pollTitle'])) {
             $newSurvey = [
-                "pollTitle" => $_POST['poll-title'],
-                "questionsNumber" => $_POST['questionsNumber'],
-                "reponse1" => $_POST['response1'],
+                "pollTitle" => $_POST['pollTitle'],
+                "response1" => $_POST['response1'],
                 "response2" => $_POST['response2'],
                 "response3" => $_POST['response3'],
-                "response4" => $_POST['response4']
+                "response4" => $_POST['response4'],
+                "endDate" => $_POST['time']
             ];
 
-
-            $cr = $this->model->createSurvey($newSurvey);
+            var_dump("bite");
+            
+            $this->model->createSurvey($newSurvey);
         }
 
         require ROOT."/App/View/surveyCreationView.php";

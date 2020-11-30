@@ -6,20 +6,26 @@ use App\Controller\surveyController;
 
 if(array_key_exists("page", $_GET)){
     switch ($_GET["page"]) {
-        case 'write':          
-                if(isset($_POST['content'])){
+        case 'write': 
 
-                    $controller = new surveyController();
-                    $controller->postMessages();
-                } else {
-                    $controller = new surveyController();
-                    $controller->getMessages();
-                }
+            if(isset($_POST['content'])){
+                $controller = new surveyController();
+                $controller->postMessages();
+            } else {
+                $controller = new surveyController();
+                $controller->getMessages();
+            }
 
-            break;
+        break;
 
         // route vers la page de création de sondages
         case 'createSurvey':
+
+            if(isset($_POST['pollTitle'])) {
+                $controller = new surveyController();
+                $controller->createSurvey();
+            }
+    
             $controller = new surveyController();
             $controller->renderCreation();
         break;
@@ -68,8 +74,14 @@ if(array_key_exists("page", $_GET)){
             break;
 
         default:
-            # code...
-            break;
+            if(isset($_SESSION['Connected']) && $_SESSION['Connected'] == true) {
+                $controller = new DefaultController();
+                $controller->homeIndex();
+            } else {
+                $controller = new UserController();
+                $controller->createUser();
+            }
+        break;
     }
 } else{
     $controller = new UserController();

@@ -30,7 +30,7 @@
         <a class="nav-link" href="?page=home">Home<!--<span class="sr-only">(current)</span> --></a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="#">Survey</a>
+      <a class="nav-link" href="?page=createSurvey">Survey</a>
     </li>
 
     <?php if(isset($_SESSION["Connected"]) && $_SESSION == true) { ?>

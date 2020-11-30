@@ -13,7 +13,7 @@ class UserController {
         $this->model = new UserModel();
     }
 
-    public function userIndex() 
+    public function userIndex()
     {
          
         $friends = $this->model->getFriends($_SESSION['ID']);

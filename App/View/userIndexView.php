@@ -13,7 +13,31 @@ require ROOT."/commons.php";
 
     <h2>Vos sondages</h2>
 
-    <p>A ajouter</p>
+    <?php if(count($surveys) <= 0) { ?>
+
+<p>C'est vide par ici</p>
+
+<?php } else { ?>
+
+<table class="table" id="friendTable">
+    <thead class="thead-dark">
+    <tr>
+        <th scope="col">Status</th>
+        <th scope="col">Question</th>
+    </tr>
+
+    <?php foreach($surveys as $su) { ?>
+
+        <tr>
+            <td>En cours</td>
+            <td><a href="?page=survey&id=<?= $su['survey_id'] ?>"><?= $su['question'] ?></a></td>
+        </tr>
+
+    <?php } ?>
+
+</table>
+
+<?php } ?>
 
     <hr>
 

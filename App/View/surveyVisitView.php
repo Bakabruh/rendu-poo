@@ -23,18 +23,18 @@ require ROOT."/commons.php";
 
 <h2>Réponses</h2>
 
-    <form action="?page=survey&id= <?= $SurId ?>" method="POST">
-        <?php 
-        $i = 1;
-        foreach($reps as $rep) { ?>
-            <label for="<?= $i ?>"><?= $rep['reponse'] ?></label>
-            <input type="radio" name="rep" value="<?= $rep['id']  ?>" id="<?= $i ?>">
-            <br>
-        <?php $i++; 
-        } var_dump($_GET['id']);?>
-        <input type="hidden" name="vote" value="<?= $SurId ?>">
-        <button type="submit" class="btn btn-primary">Répondre !</button>
-    </form>
+<form action="?page=survey&id= <?= $SurId ?>" method="POST">
+    <?php 
+    $i = 1;
+    foreach($reps as $rep) { ?>
+        <label for="<?= $i ?>"><?= $rep['reponse'] ?></label>
+        <input type="radio" name="rep" value="<?= $rep['id']  ?>" id="<?= $i ?>">
+        <br>
+    <?php $i++; 
+    } var_dump($_GET['id']);?>
+    <input type="hidden" name="vote" value="<?= $SurId ?>">
+    <button type="submit" class="btn btn-primary">Répondre !</button>
+</form>
 
 
 

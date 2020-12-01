@@ -15,6 +15,8 @@ class UserController {
 
     public function userIndex()
     {
+
+        $surveys = $this->model->getUserSurveys();
          
         $friends = $this->model->getFriends($_SESSION['ID']);
 

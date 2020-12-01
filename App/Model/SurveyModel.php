@@ -6,22 +6,55 @@ use Core\Database;
 class SurveyModel extends Database
 {
 
-    // fonction pour créer un sondage et les envoyer en bdd
+    // fonctions pour créer un sondage et les envoyer en bdd
     public function createSurvey(array $cs)
     {
-        $surveyCreation = "INSERT INTO polls (poll-title, reponse1, reponse2,
-        reponse3, reponse4, creationDate, endDate, creatorsId)
-        VALUES(:pollTitle, :response1, :response2, :response3, :response4, NOW(), :endDate, '".$_SESSION['ID']."'";
+        $surveyCreation = "INSERT INTO surveys(question, end, creatorsId) VALUES(:pollTitle, :endDate, :id)";
 
+        
         return $this->prepare($surveyCreation, $cs);
     }
 
-    // fonction pour sélectionner les champs remplis du sondage en bdd
-    public function getSurveys()
+    public function getSurveyId()
     {
-        $getSurveys = "SELECT poll-title, response1, response2, response3, response4 FROM polls";
+        $id = "SELECT * FROM surveys";
+        return $this->query($id, true);
+    }
 
-        return $this->query($getSurveys, true);
+    public function createSurvey2($data)
+    {
+        $survey2 = "INSERT INTO answers (survey_id, reponse) VALUES (:id, :reponse)";
+        return $this->prepare($survey2, $data);
+    }
+
+
+
+    // fonction pour afficher le sondage séléctionné
+
+    public function getSurvey()
+    {
+        $getEm = "SELECT * FROM surveys INNER JOIN users on surveys.creatorsId = users.user_id";
+        return $this->query($getEm, false);
+    }
+
+    public function getAnswers($id)
+    {
+        $getEm = "SELECT * FROM answers WHERE survey_id = '" . $id . "'";
+        return $this->query($getEm, true);
+    }
+
+    //repondre au sondage
+
+    public function getGood($id)
+    {
+        $answerVotes = "SELECT * FROM answers WHERE id = '" . $id . "'";
+        return $this->query($answerVotes, false);
+    }
+
+    public function updateVote($id, $v)
+    {
+        $update = "UPDATE answers SET votes = '" . $v . "' WHERE id = '" . $id . "'";
+        return $this->prepare($update, []);
     }
 
     public function getMess()
@@ -31,10 +64,10 @@ class SurveyModel extends Database
         return $this->query($msg, true);
     }
 
-    public function postMess(array $gm)
+    public function postMess($newmsg)
     {
-        $postMsg = "INSERT INTO comments(author, content, created_at) VALUES(:author, :content, NOW())";
+        $postMsg = "INSERT INTO comments(author, content) VALUES(:author, :content)";
 
-        return $this->prepare($postMsg, $gm);
+        return $this->prepare($postMsg, $newmsg);
     }
 }

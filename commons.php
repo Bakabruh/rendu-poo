@@ -2,19 +2,13 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" crossorigin="anonymous">
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="/assets/css/style.css">
 </head>
 <style>
-  * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
 
   body {
-    width: 90%;
-    margin: auto;
+    background-color: <?= $_SESSION['theme'] ?>;
   }
-
 
 </style>
 
@@ -30,7 +24,7 @@
         <a class="nav-link" href="?page=home">Home<!--<span class="sr-only">(current)</span> --></a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="?page=createSurvey">Survey</a>
+      <a class="nav-link" href="?page=createSurvey">Create a survey</a>
     </li>
 
     <?php if(isset($_SESSION["Connected"]) && $_SESSION == true) { ?>
@@ -41,7 +35,12 @@
       <li class="nav-item">
         <a class="nav-link" href="?page=create-user&action=disconnect">Log Out</a>
       </li>
-    <?php } ?> 
+    <?php } 
+    
+    if ($_SESSION == [] && $_GET["page"] != "create-user") {
+      header("Location: index.php?page=create-user");
+    } 
+    ?> 
     
   </ul>
 </div>

@@ -54,7 +54,7 @@ require ROOT."/commons.php";
                 url:"index.php?page=write",
                 method:"POST",
                 dataType:"json",
-                data:{content},
+                data:{author, content},
                 success:function(response){
                     showMessages();
                 }

@@ -14,20 +14,49 @@ class surveyController
 
     public function renderCreation()
     {
-        if(isset($_POST['pollTitle'])) {
-            $newSurvey = [
-                "pollTitle" => $_POST['pollTitle'],
-                "response1" => $_POST['response1'],
-                "response2" => $_POST['response2'],
-                "response3" => $_POST['response3'],
-                "response4" => $_POST['response4'],
-                "endDate" => $_POST['time']
-            ];
+        require ROOT."/App/View/surveyCreationView.php";
+    }
+
+    public function createSurvey()
+    {
+
+        $newSurvey = [
+            "pollTitle" => $_POST['pollTitle'],
+            "endDate" => $_POST['time'],
+            "id" => $_SESSION['ID']
+        ];
+
+        $answers = [
+            "response1" => $_POST['response1'],
+            "response2" => $_POST['response2'],
+            "response3" => $_POST['response3'],
+            "response4" => $_POST['response4']
+        ];
+
+        $this->model->createSurvey($newSurvey);
+
+        $id = $this->model->getSurveyId();
+
+        $test = end($id);
+
+        $sId = $test['survey_id'];
+
+        foreach($answers as $an) {
             
-            $this->model->createSurvey($newSurvey);
+            if($an != "") {
+                $data = [
+                    "reponse" => $an,
+                    "id" => $sId
+                ];
+
+                $this->model->createSurvey2($data); 
+            } else {
+               
+            }
+            
         }
 
-        require ROOT."/App/View/surveyCreationView.php";
+        header("Location: index.php?page=home");
     }
 
     public function renderIndex()
@@ -45,11 +74,17 @@ class surveyController
             $contenu = $_POST['content'];
 
             $get = $this->model->getMess($contenu);
+<<<<<<< HEAD
 
             echo \json_encode($get);
         }
 
 
+=======
+            echo json_encode($get);
+        }
+
+>>>>>>> 35a2400f8b388ceab36b4878875eadd2273d3d41
         require ROOT."/App/View/oneSurveyView.php";
     }
 
@@ -65,10 +100,42 @@ class surveyController
 
             $post = $this->model->postMess($newMsg);
 
+<<<<<<< HEAD
             echo \json_encode($newMsg);
+=======
+            echo json_encode($newMsg);
+>>>>>>> 35a2400f8b388ceab36b4878875eadd2273d3d41
         }
         
         require ROOT."/App/View/oneSurveyView.php";
     
+    }
+
+    public function renderSurvey()
+    {
+        $SurId = $_GET['id'];
+
+        $survey = $this->model->getSurvey();
+
+        $reps = $this->model->getAnswers($SurId);
+
+        require ROOT."/App/View/SurveyVisitView.php";
+
+    }
+
+    public function vote()
+    {
+        $SurId = $_POST['vote'];
+
+        $choice = $_POST['rep'];
+
+        $poo = $this->model->getGood($choice);
+
+        $poov = intval($poo['votes']);
+
+        $poov++;
+
+        $this->model->updateVote($choice, $poov);
+
     }
 }

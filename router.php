@@ -6,22 +6,30 @@ use App\Controller\surveyController;
 
 if(array_key_exists("page", $_GET)){
     switch ($_GET["page"]) {
-        case 'write':          
-                if(isset($_POST['content'])){
-
-                    $controller = new surveyController();
-                    $controller->postMessages();
-                } else {
-                    $controller = new surveyController();
-                    $controller->getMessages();
-                }
-
-            break;
 
         // route vers la page de création de sondages
         case 'createSurvey':
+
+            if(isset($_POST['pollTitle'])) {
+                $controller = new surveyController();
+                $controller->createSurvey();
+            }
+    
             $controller = new surveyController();
             $controller->renderCreation();
+        break;
+
+        case 'survey' :
+
+            if(isset($_POST['vote'])) {
+                $controller = new surveyController();
+                $controller->vote();
+                $controller->renderSurvey();
+            } else {
+                $controller = new surveyController();
+                $controller->renderSurvey();
+            }
+
         break;
         
         // route vers la page de création d'utilisateur
@@ -48,6 +56,25 @@ if(array_key_exists("page", $_GET)){
             if(array_key_exists("page", $_GET) && array_key_exists("name", $_GET)) {
                 $controller = new UserController();
                 $controller->visitUser();
+            } else if(isset($_POST['rq_user_id'])) {
+                $controller = new UserController();
+                $controller->sendRequest(); 
+            } else if(isset($_POST['accept']) || isset($_POST['decline'])) {
+                $controller = new UserController();
+                $controller->treatRequest();
+                $controller->userIndex();
+            } else if(isset($_POST['delete'])) {
+                $controller = new UserController();
+                $controller->deleteFriend(); 
+                $controller->userIndex(); 
+            } else if(isset($_POST['newname'])) {
+                $controller = new UserController();
+                $controller->newName(); 
+                $controller->userIndex(); 
+            } else if(isset($_POST['color'])) {
+                $controller = new UserController();
+                $controller->newColor(); 
+                $controller->userIndex(); 
             } else {
                 $controller = new UserController();
                 $controller->userIndex(); 
@@ -68,8 +95,14 @@ if(array_key_exists("page", $_GET)){
             break;
 
         default:
-            # code...
-            break;
+            if(isset($_SESSION['Connected']) && $_SESSION['Connected'] == true) {
+                $controller = new DefaultController();
+                $controller->homeIndex();
+            } else {
+                $controller = new UserController();
+                $controller->createUser();
+            }
+        break;
     }
 } else{
     $controller = new UserController();

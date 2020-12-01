@@ -6,14 +6,44 @@ use Core\Database;
 class SurveyModel extends Database
 {
 
-    // fonction pour créer un sondage et les envoyer en bdd
+    // fonctions pour créer un sondage et les envoyer en bdd
     public function createSurvey(array $cs)
     {
-        $surveyCreation = "INSERT INTO polls (pollTitle, reponse1, reponse2, reponse3, reponse4, endDate, creatorsId)
-        VALUES(:pollTitle, :response1, :response2, :response3, :response4, :endDate, :id)";
+        $surveyCreation = "INSERT INTO surveys(question, end, creatorsId) VALUES(:pollTitle, :endDate, :id)";
 
+        
         return $this->prepare($surveyCreation, $cs);
     }
+
+    public function getSurveyId()
+    {
+        $id = "SELECT * FROM surveys";
+        return $this->query($id, true);
+    }
+
+    public function createSurvey2($data)
+    {
+        $survey2 = "INSERT INTO answers (survey_id, reponse) VALUES (:id, :reponse)";
+        return $this->prepare($survey2, $data);
+    }
+
+
+
+    // fonction pour afficher le sondage séléctionné
+
+    public function getSurvey()
+    {
+        $getEm = "SELECT * FROM surveys INNER JOIN users on surveys.creatorsId = users.user_id";
+        return $this->query($getEm, false);
+    }
+
+    public function getAnswers($id)
+    {
+        $getEm = "SELECT * FROM answers WHERE survey_id = '" . $id . "'";
+        return $this->query($getEm, true);
+    }
+
+
 
     public function getMess()
     {

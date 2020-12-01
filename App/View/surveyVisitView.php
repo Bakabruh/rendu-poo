@@ -3,6 +3,7 @@
 use App\Controller\SurveyController;
 require ROOT."/commons.php";
 
+
 ?>
 
 
@@ -15,4 +16,26 @@ require ROOT."/commons.php";
 </head>
 <body>
 
-<h1></h1>
+<h1><?= $survey['question'] ?> </h1> 
+<p><br> de <?= $survey['user_name'] ?></p>
+
+<hr>
+
+<h2>Réponses</h2>
+
+    <form action="?page=survey&id= <?= $SurId ?>" method="POST">
+        <?php 
+        $i = 1;
+        foreach($reps as $rep) { ?>
+            <label for="<?= $i ?>"><?= $rep['reponse'] ?></label>
+            <input type="radio" name="rep<?= $i ?>" value="<?= $i ?>" id="<?= $i ?>">
+            <br>
+        <?php $i++; 
+        } ?>
+
+        <button type="submit" class="btn btn-primary">Répondre !</button>
+    </form>
+
+
+
+

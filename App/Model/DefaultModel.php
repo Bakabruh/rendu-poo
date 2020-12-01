@@ -8,7 +8,7 @@ class DefaultModel extends Database
 
     public function getSurveys()
     {
-        $getSurveys = "SELECT * FROM polls INNER JOIN users ON creatorsId = user_id";
+        $getSurveys = "SELECT * FROM surveys INNER JOIN users ON creatorsId = user_id";
 
         return $this->query($getSurveys, true);
     }

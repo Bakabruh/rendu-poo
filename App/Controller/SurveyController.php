@@ -22,20 +22,41 @@ class surveyController
 
         $newSurvey = [
             "pollTitle" => $_POST['pollTitle'],
-            "response1" => $_POST['response1'],
-            "response2" => $_POST['response2'],
-            "response3" => $_POST['response3'],
-            "response4" => $_POST['response4'],
             "endDate" => $_POST['time'],
             "id" => $_SESSION['ID']
         ];
 
-        
-        $test = $this->model->createSurvey($newSurvey);
-        var_dump($test);
-        var_dump($newSurvey);
-        die();
-        require ROOT."/App/View/surveyCreationView.php";
+        $answers = [
+            "response1" => $_POST['response1'],
+            "response2" => $_POST['response2'],
+            "response3" => $_POST['response3'],
+            "response4" => $_POST['response4']
+        ];
+
+        $this->model->createSurvey($newSurvey);
+
+        $id = $this->model->getSurveyId();
+
+        $test = end($id);
+
+        $sId = $test['survey_id'];
+
+        foreach($answers as $an) {
+            
+            if($an != "") {
+                $data = [
+                    "reponse" => $an,
+                    "id" => $sId
+                ];
+
+                $this->model->createSurvey2($data); 
+            } else {
+               
+            }
+            
+        }
+
+        header("Location: index.php?page=home");
     }
 
     public function renderIndex()
@@ -53,7 +74,7 @@ class surveyController
             $contenu = $_POST['content'];
 
             $get = $this->model->getMess($contenu);
-            echo \json_encode($get);
+            echo json_encode($get);
         }
 
         require ROOT."/App/View/oneSurveyView.php";
@@ -71,7 +92,7 @@ class surveyController
 
             $post = $this->model->postMess($newMsg);
 
-            echo \json_encode($newMsg);
+            echo json_encode($newMsg);
         }
         
         require ROOT."/App/View/oneSurveyView.php";
@@ -81,6 +102,11 @@ class surveyController
     {
         $SurId = $_GET['id'];
 
-        
+        $survey = $this->model->getSurvey();
+
+        $reps = $this->model->getAnswers($SurId);
+
+        require ROOT."/App/View/SurveyVisitView.php";
+
     }
 }

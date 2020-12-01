@@ -21,8 +21,14 @@ if(array_key_exists("page", $_GET)){
 
         case 'survey' :
 
-            $controller = new surveyController();
-            $controller->renderSurvey();
+            if(isset($_POST['vote'])) {
+                $controller = new surveyController();
+                $controller->vote();
+                $controller->renderSurvey();
+            } else {
+                $controller = new surveyController();
+                $controller->renderSurvey();
+            }
 
         break;
         

@@ -43,7 +43,19 @@ class SurveyModel extends Database
         return $this->query($getEm, true);
     }
 
+    //repondre au sondage
 
+    public function getGood($id)
+    {
+        $answerVotes = "SELECT * FROM answers WHERE id = '" . $id . "'";
+        return $this->query($answerVotes, false);
+    }
+
+    public function updateVote($id, $v)
+    {
+        $update = "UPDATE answers SET votes = '" . $v . "' WHERE id = '" . $id . "'";
+        return $this->prepare($update, []);
+    }
 
     public function getMess()
     {

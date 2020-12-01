@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Nov 22, 2020 at 10:15 PM
+-- Generation Time: Dec 01, 2020 at 02:35 AM
 -- Server version: 5.7.24
 -- PHP Version: 7.2.19
 
@@ -24,6 +24,30 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `answers`
+--
+
+CREATE TABLE `answers` (
+  `id` int(11) NOT NULL,
+  `survey_id` int(11) NOT NULL,
+  `reponse` varchar(255) NOT NULL,
+  `votes` int(11) DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `answers`
+--
+
+INSERT INTO `answers` (`id`, `survey_id`, `reponse`, `votes`) VALUES
+(8, 7, 'McDo', 0),
+(9, 7, 'Salade', 0),
+(10, 7, 'Tomate', 0),
+(17, 10, 'Xbox', 0),
+(18, 10, 'Play', 0);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `bonds`
 --
 
@@ -38,7 +62,8 @@ CREATE TABLE `bonds` (
 --
 
 INSERT INTO `bonds` (`bonds_id`, `user_id1`, `user_id2`) VALUES
-(1, 28, 29);
+(12, 28, 30),
+(13, 28, 31);
 
 -- --------------------------------------------------------
 
@@ -47,27 +72,35 @@ INSERT INTO `bonds` (`bonds_id`, `user_id1`, `user_id2`) VALUES
 --
 
 CREATE TABLE `comments` (
-  `survey_id` int(11) NOT NULL,
-  `text` varchar(255) NOT NULL
+  `comment_id` int(11) NOT NULL,
+  `author` varchar(255) NOT NULL,
+  `content` varchar(255) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `conv_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `comments`
+--
+
+INSERT INTO `comments` (`comment_id`, `author`, `content`, `created_at`, `conv_id`) VALUES
+(1, 'Nisouc', 'dd', '2020-11-30 22:51:08', 1),
+(2, 'Nisouc', 'oo', '2020-11-30 22:51:11', 1),
+(3, 'Nisouc', 'oo', '2020-11-30 22:52:34', 1),
+(4, 'Nisouc', 'oo', '2020-11-30 22:52:35', 1),
+(5, 'Nisouc', 'oo', '2020-11-30 22:54:59', 1),
+(6, 'Nisouc', 'oo', '2020-11-30 22:55:00', 1),
+(17, 'Nisouc', 'oo', '2020-11-30 22:56:59', 1);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `polls`
+-- Table structure for table `conversations`
 --
 
-CREATE TABLE `polls` (
-  `poll_id` int(11) NOT NULL,
-  `poll-title` int(11) NOT NULL,
-  `reponses_Number` int(11) NOT NULL,
-  `reponse1` varchar(255) NOT NULL,
-  `reponse2` varchar(255) NOT NULL,
-  `reponse3` varchar(255) DEFAULT NULL,
-  `reponse4` varchar(255) DEFAULT NULL,
-  `creationDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `endDate` timestamp NOT NULL,
-  `creatorsId` int(11) NOT NULL
+CREATE TABLE `conversations` (
+  `convo_id` int(11) NOT NULL,
+  `poll_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -83,6 +116,34 @@ CREATE TABLE `requests` (
   `state` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Dumping data for table `requests`
+--
+
+INSERT INTO `requests` (`request_id`, `user_1_id`, `user_2_id`, `state`) VALUES
+(8, 28, 29, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `surveys`
+--
+
+CREATE TABLE `surveys` (
+  `survey_id` int(11) NOT NULL,
+  `question` varchar(255) NOT NULL,
+  `end` varchar(255) NOT NULL,
+  `creatorsId` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `surveys`
+--
+
+INSERT INTO `surveys` (`survey_id`, `question`, `end`, `creatorsId`) VALUES
+(7, 'Quel repas ce soir ?', '04:20', 28),
+(10, 'Meilleure console ?', '02:24', 28);
+
 -- --------------------------------------------------------
 
 --
@@ -94,22 +155,29 @@ CREATE TABLE `users` (
   `user_name` varchar(255) NOT NULL,
   `user_pass` varchar(255) NOT NULL,
   `user_email` varchar(255) NOT NULL,
-  `status` tinyint(1) NOT NULL
+  `status` tinyint(1) NOT NULL,
+  `user_theme` varchar(255) NOT NULL DEFAULT 'white'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`user_id`, `user_name`, `user_pass`, `user_email`, `status`) VALUES
-(28, 'Nisouc', '$2y$10$EkVmiwRVVN9T.v4zbewyDupSWweqTrO7iLTHaFMXJkbbz9k/.tiTa', 'Nisouc@outlook.com', 0),
-(29, 'test', '$2y$10$dsu1Uz0f3BvLnrPtAGIJ1upKw1xroQUc2p78ay3ZSzbldaaM0KyXO', 'test@test.fr', 0),
-(30, 'essai', '$2y$10$3BzdX.08GQTjVgL1DbejTuF1cUbXzwFCWAI2BjNLgFoyFkj.FaHDm', 'essai@essai.fr', 0),
-(31, 'ttt', '$2y$10$Y2LrEJ.QNDn0sY81sNFTZObbA3ZBxistiUCog4NT/hyuSvsVXcmGm', 'ttt@ttt.fr', 0);
+INSERT INTO `users` (`user_id`, `user_name`, `user_pass`, `user_email`, `status`, `user_theme`) VALUES
+(28, 'Nisouc', '$2y$10$EkVmiwRVVN9T.v4zbewyDupSWweqTrO7iLTHaFMXJkbbz9k/.tiTa', 'Nisouc@outlook.com', 0, 'dimgrey'),
+(29, 'test', '$2y$10$dsu1Uz0f3BvLnrPtAGIJ1upKw1xroQUc2p78ay3ZSzbldaaM0KyXO', 'test@test.fr', 0, 'white'),
+(30, 'essai', '$2y$10$3BzdX.08GQTjVgL1DbejTuF1cUbXzwFCWAI2BjNLgFoyFkj.FaHDm', 'essai@essai.fr', 0, 'white'),
+(31, 'ttt', '$2y$10$Y2LrEJ.QNDn0sY81sNFTZObbA3ZBxistiUCog4NT/hyuSvsVXcmGm', 'ttt@ttt.fr', 0, 'white');
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `answers`
+--
+ALTER TABLE `answers`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `bonds`
@@ -123,19 +191,25 @@ ALTER TABLE `bonds`
 -- Indexes for table `comments`
 --
 ALTER TABLE `comments`
-  ADD PRIMARY KEY (`survey_id`);
+  ADD PRIMARY KEY (`comment_id`);
 
 --
--- Indexes for table `polls`
+-- Indexes for table `conversations`
 --
-ALTER TABLE `polls`
-  ADD PRIMARY KEY (`poll_id`);
+ALTER TABLE `conversations`
+  ADD PRIMARY KEY (`convo_id`);
 
 --
 -- Indexes for table `requests`
 --
 ALTER TABLE `requests`
   ADD PRIMARY KEY (`request_id`);
+
+--
+-- Indexes for table `surveys`
+--
+ALTER TABLE `surveys`
+  ADD PRIMARY KEY (`survey_id`);
 
 --
 -- Indexes for table `users`
@@ -149,28 +223,40 @@ ALTER TABLE `users`
 --
 
 --
+-- AUTO_INCREMENT for table `answers`
+--
+ALTER TABLE `answers`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+
+--
 -- AUTO_INCREMENT for table `bonds`
 --
 ALTER TABLE `bonds`
-  MODIFY `bonds_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `bonds_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `comments`
 --
 ALTER TABLE `comments`
-  MODIFY `survey_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `comment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
--- AUTO_INCREMENT for table `polls`
+-- AUTO_INCREMENT for table `conversations`
 --
-ALTER TABLE `polls`
-  MODIFY `poll_id` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `conversations`
+  MODIFY `convo_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `requests`
 --
 ALTER TABLE `requests`
-  MODIFY `request_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `request_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT for table `surveys`
+--
+ALTER TABLE `surveys`
+  MODIFY `survey_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `users`

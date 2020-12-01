@@ -109,4 +109,20 @@ class surveyController
         require ROOT."/App/View/SurveyVisitView.php";
 
     }
+
+    public function vote()
+    {
+        $SurId = $_POST['vote'];
+
+        $choice = $_POST['rep'];
+
+        $poo = $this->model->getGood($choice);
+
+        $poov = intval($poo['votes']);
+
+        $poov++;
+
+        $this->model->updateVote($choice, $poov);
+
+    }
 }

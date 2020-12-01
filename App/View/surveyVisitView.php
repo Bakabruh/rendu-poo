@@ -28,11 +28,11 @@ require ROOT."/commons.php";
         $i = 1;
         foreach($reps as $rep) { ?>
             <label for="<?= $i ?>"><?= $rep['reponse'] ?></label>
-            <input type="radio" name="rep<?= $i ?>" value="<?= $i ?>" id="<?= $i ?>">
+            <input type="radio" name="rep" value="<?= $rep['id']  ?>" id="<?= $i ?>">
             <br>
         <?php $i++; 
-        } ?>
-
+        } var_dump($_GET['id']);?>
+        <input type="hidden" name="vote" value="<?= $SurId ?>">
         <button type="submit" class="btn btn-primary">Répondre !</button>
     </form>
 

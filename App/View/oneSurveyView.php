@@ -31,8 +31,8 @@ require ROOT."/commons.php";
         </div>
 
         <div class="user-Inputs">
-            <form action="?task" method="POST">
-                <input type="text" name="author" id="author" placeholder="Username">
+            <form action="?page=write" method="POST">
+                <input type="hidden" name="author" id="author" value="<?= $_SESSION['Username'] ?>">
                 <input type="text" name="content" id="content" placeholder="Message">
                 <button type="submit">Send</button>
             </form>
@@ -41,29 +41,17 @@ require ROOT."/commons.php";
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
     <script>
-    
-    function showMessage() {
 
-        $.ajax({
-            url: "index.php?task",
-            datatype: json,
-            success: function(response) {
-                response.foreach(message => {
-                    $('#msg-author').append(`<p>${message.author}</p>`);
-                    $('#msg-received').append(`<p>${message.content}</p>`);
-                })
-            }
-        })
-
-    }
+    showMessage();
 
     function postMessage() {
 
         $("button").click(function(e){
             e.preventDefault();
+            let author = $('#author').val();
             let content = $("#content").val();
             $.ajax({
-                url:"index.php?task=write",
+                url:"index.php?page=write",
                 method:"POST",
                 dataType:"json",
                 data:{content},
@@ -71,6 +59,21 @@ require ROOT."/commons.php";
                     showMessages();
                 }
             })
+        })
+
+    }
+
+    function showMessage() {
+
+        $.ajax({
+            url: "index.php?page=write",
+            datatype: json,
+            success: function(response) {
+                response.foreach(message => {
+                    $('#msg-author').html(`<p>${message.author}</p>`);
+                    $('#msg-received').html(`<p>${message.content}</p>`);
+                })
+            }
         })
 
     }

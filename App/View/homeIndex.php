@@ -42,17 +42,42 @@ require ROOT."/commons.php";
 
 <div class="container">
 
-<?php foreach($gs as $survey):  ?>
-
 <div class="card border-primary mb-3" style="max-width: 20rem; margin: 50px">
-  <div class="card-header"><a href="?task=write"><?php echo $survey['poll-title']; ?></a></div>
+  <div class="card-header"><a href="?page=write">Survey</a></div>
   <div class="card-body">
     <h4 class="card-title"></h4>
     <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
   </div>
 </div>
 
-<?php endforeach; ?>
+<div class="card border-primary mb-3" style="max-width: 20rem; margin: 50px">
+  <div class="card-header"><a href="?page=write">Survey</a></div>
+  <div class="card-body">
+    <h4 class="card-title"></h4>
+    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+  </div>
+</div>
+<div class="card border-primary mb-3" style="max-width: 20rem; margin: 50px">
+  <div class="card-header"><a href="?page=write">Survey</a></div>
+  <div class="card-body">
+    <h4 class="card-title"></h4>
+    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+  </div>
+</div>
+<div class="card border-primary mb-3" style="max-width: 20rem; margin: 50px">
+  <div class="card-header"><a href="?page=write">Survey</a></div>
+  <div class="card-body">
+    <h4 class="card-title"></h4>
+    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+  </div>
+</div>
+<div class="card border-primary mb-3" style="max-width: 20rem; margin: 50px">
+  <div class="card-header"><a href="?page=write">Survey</a></div>
+  <div class="card-body">
+    <h4 class="card-title"></h4>
+    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+  </div>
+</div>
 
 </div>
     

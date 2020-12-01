@@ -42,7 +42,7 @@ require ROOT."/commons.php";
         <label for="pollTitle">Survey's question</label>
         <input type="text" name="pollTitle" id="pollTitle" placeholder="Question...">
         <label for="time">How much time do you want to set ?</label>
-        <input type="date" name="time" id="time">
+        <input type="time" name="time" id="time">
         <label for="select">Possible answers :</label>
         <input type="text" value="" name="response1" required>
         <input type="text" value="" name="response2" required>

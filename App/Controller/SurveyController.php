@@ -23,8 +23,6 @@ class surveyController
                 "response4" => $_POST['response4'],
                 "endDate" => $_POST['time']
             ];
-
-            var_dump("bite");
             
             $this->model->createSurvey($newSurvey);
         }
@@ -47,9 +45,10 @@ class surveyController
             $contenu = $_POST['content'];
 
             $get = $this->model->getMess($contenu);
+
+            echo \json_encode($get);
         }
 
-        echo \json_encode($get);
 
         require ROOT."/App/View/oneSurveyView.php";
     }
@@ -57,15 +56,19 @@ class surveyController
     public function postMessages()
     {
 
-        $newMsg = [
-            "author" => $_POST['author'],
-            "content" => $_POST['content']
-        ];
+        if(isset($_POST['content'])) {
 
-        $post = $this->model->postMess($newMsg);
+            $newMsg = [
+                "author" => $_SESSION['Username'],
+                "content" => $_POST['content']
+            ];
 
-        echo \json_encode($newMsg);
+            $post = $this->model->postMess($newMsg);
 
+            echo \json_encode($newMsg);
+        }
+        
         require ROOT."/App/View/oneSurveyView.php";
+    
     }
 }

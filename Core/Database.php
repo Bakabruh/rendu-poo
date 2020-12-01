@@ -4,6 +4,8 @@ namespace Core;
 
 class Database{
 
+    // Set up database
+
     protected $pdo;
     private $host;
     private $dbname;
@@ -24,6 +26,8 @@ class Database{
         }
     }
 
+    // Set up query request function
+
     public function query(string $statement, bool $one)
     {
         $query = $this->pdo->query($statement);
@@ -33,6 +37,8 @@ class Database{
             return $query->fetchAll(\PDO::FETCH_ASSOC);
         }
     }
+
+    // Set up prepare request function
 
     public function prepare(string $statement, array $data = array())
     {

@@ -74,9 +74,13 @@ class surveyController
             echo \json_encode($newMsg);
         }
         
+        require ROOT."/App/View/oneSurveyView.php";
+    }
+
+    public function renderSurvey()
+    {
+        $SurId = $_GET['id'];
 
         
-
-        require ROOT."/App/View/oneSurveyView.php";
     }
 }

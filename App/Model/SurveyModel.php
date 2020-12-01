@@ -15,14 +15,6 @@ class SurveyModel extends Database
         return $this->prepare($surveyCreation, $cs);
     }
 
-    // fonction pour sélectionner les champs remplis du sondage en bdd
-    public function getSurveys()
-    {
-        $getSurveys = "SELECT poll-title, response1, response2, response3, response4 FROM polls";
-
-        return $this->query($getSurveys, true);
-    }
-
     public function getMess()
     {
         $msg = "SELECT * FROM comments ORDER BY created_at DESC LIMIT 15";

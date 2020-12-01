@@ -29,6 +29,13 @@ if(array_key_exists("page", $_GET)){
             $controller = new surveyController();
             $controller->renderCreation();
         break;
+
+        case 'survey' :
+
+            $controller = new surveyController();
+            $controller->renderSurvey();
+
+        break;
         
         // route vers la page de création d'utilisateur
         case 'create-user':

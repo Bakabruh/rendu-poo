@@ -56,6 +56,25 @@ if(array_key_exists("page", $_GET)){
             if(array_key_exists("page", $_GET) && array_key_exists("name", $_GET)) {
                 $controller = new UserController();
                 $controller->visitUser();
+            } else if(isset($_POST['rq_user_id'])) {
+                $controller = new UserController();
+                $controller->sendRequest(); 
+            } else if(isset($_POST['accept']) || isset($_POST['decline'])) {
+                $controller = new UserController();
+                $controller->treatRequest();
+                $controller->userIndex();
+            } else if(isset($_POST['delete'])) {
+                $controller = new UserController();
+                $controller->deleteFriend(); 
+                $controller->userIndex(); 
+            } else if(isset($_POST['newname'])) {
+                $controller = new UserController();
+                $controller->newName(); 
+                $controller->userIndex(); 
+            } else if(isset($_POST['color'])) {
+                $controller = new UserController();
+                $controller->newColor(); 
+                $controller->userIndex(); 
             } else {
                 $controller = new UserController();
                 $controller->userIndex(); 

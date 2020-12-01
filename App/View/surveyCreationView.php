@@ -3,7 +3,7 @@
 use App\Controller\SurveyController;
 require ROOT."/commons.php";
 
-?>
+require ROOT."/bootstraplink.html"; ?>
 
 <!DOCTYPE html>
 <html lang="en">

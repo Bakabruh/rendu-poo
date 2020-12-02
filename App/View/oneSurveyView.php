@@ -1,7 +1,6 @@
 <?php
 
 use App\Controller\SurveyController;
-require ROOT."/commons.php";
 
 ?>
 
@@ -15,6 +14,17 @@ require ROOT."/commons.php";
     <title></title>
 </head>
 <body>
+
+<style>
+
+    .chat {
+        width: 20%;
+        margin:  100px auto;
+        padding: 30px;
+        background-color: #F0F0F0;
+    }
+
+</style>
 
     <section class="chat">
         <div class="messages">
@@ -31,7 +41,7 @@ require ROOT."/commons.php";
         </div>
 
         <div class="user-Inputs">
-            <form action="?page=write" method="POST">
+            <form action="?page=survey&&id=<?= $su['survey_id'] ?>" method="POST">
                 <input type="hidden" name="author" id="author" value="<?= $_SESSION['Username'] ?>">
                 <input type="text" name="content" id="content" placeholder="Message">
                 <button type="submit">Send</button>
@@ -41,11 +51,14 @@ require ROOT."/commons.php";
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
     <script>
+
+
     
     function showMessage() {
 
         $.ajax({
-            url: "index.php?page=write",
+            url: "index.php?page=survey",
+            type: "GET",
             datatype: json,
             success: function(response) {
                 response.foreach(message => {
@@ -64,8 +77,8 @@ require ROOT."/commons.php";
             let author = $('#author').val();
             let content = $("#content").val();
             $.ajax({
-                url:"index.php?page=write",
-                method:"POST",
+                url:"index.php?page=survey",
+                type:"POST",
                 dataType:"json",
                 data:{author, content},
                 success:function(response){

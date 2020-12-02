@@ -28,6 +28,8 @@ if(array_key_exists("page", $_GET)){
             } else {
                 $controller = new surveyController();
                 $controller->renderSurvey();
+                $controller = new surveyController();
+                $controller->getMessages();
             }
 
         break;

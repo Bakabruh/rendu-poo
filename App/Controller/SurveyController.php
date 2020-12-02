@@ -59,14 +59,6 @@ class surveyController
         header("Location: index.php?page=home");
     }
 
-    public function renderIndex()
-    {
-
-        $gs = $this->model->getSurveys();
-
-        require ROOT."/App/View/homeIndex.php";
-    }
-
     public function getMessages()
     {
 
@@ -106,8 +98,19 @@ class surveyController
 
         $reps = $this->model->getAnswers($SurId);
 
+        
+
         require ROOT."/App/View/SurveyVisitView.php";
 
+    }
+
+    public function getVotes()
+    {
+        $SurId = $_GET['id'];
+        
+        $reps = $this->model->getAnswers($SurId);
+
+        echo json_encode($reps);
     }
 
     public function vote()

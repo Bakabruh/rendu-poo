@@ -25,6 +25,9 @@ if(array_key_exists("page", $_GET)){
                 $controller = new surveyController();
                 $controller->vote();
                 $controller->renderSurvey();
+            }else if(array_key_exists("function", $_GET)){
+                $controller = new surveyController();
+                $controller->getVotes();
             } else {
                 $controller = new surveyController();
                 $controller->renderSurvey();

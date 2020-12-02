@@ -47,8 +47,14 @@ require ROOT."/commons.php";
         <?php if(count($friends) <= 0) { ?>
 
             <p>C'est vide par ici</p>
+        <?php } else {
+            
+            $to = $_POST['user_email'];
+            $subject = "Vote now !";
+            $txt = "Hey man ! Join us for voting by clicking " ?> <a href="index.php?page=survey&&id= <?= $_GET['survey_id'] ?>"> here</a><?php "!";
+            $headers = "From:". $_SESSION['user_email'];
 
-        <?php } else {          
+            mail($to, $subject, $txt, $headers);
             
             ?>
 
@@ -70,7 +76,7 @@ require ROOT."/commons.php";
                         <td>None</td>
                         <td><?= $fr['user_id'] ?></td>
                         <td>
-                            <form action="?page=user" method="POST"> 
+                            <form action="?page=user" method="POST">
                                 <input type="hidden" name="delete" value="<?= $fr['user_id'] ?>">
                                 <button type="submit">Retirer</button>
                             </form> 

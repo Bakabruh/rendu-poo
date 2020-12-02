@@ -4,6 +4,10 @@
     box-sizing: border-box;
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
 body {
 width: 90%;
 margin: auto;
@@ -57,4 +61,9 @@ margin: auto;
     background-color: darkturquoise;
     width: 5%;
     margin: 0.2vH 0%;
+}
+
+#commentbox {
+    display: flex;
+    flex-direction: column-reverse;
 }

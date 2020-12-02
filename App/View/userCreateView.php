@@ -4,6 +4,10 @@ use App\Controller\UserController;
 
 require ROOT."/commons.php"; 
 
+if(isset($_SESSION)) {
+  header("Location : index.php?page=home");
+}
+
 ?>
 
 

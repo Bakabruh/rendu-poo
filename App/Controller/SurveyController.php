@@ -28,7 +28,7 @@ class surveyController
 
         $newSurvey = [
             "pollTitle" => $_POST['pollTitle'],
-            "id"        => $_SESSION['ID']['user_id'],
+            "id"        => $_SESSION['ID'],
             "dateEnd"   => $dateEnd,
         ];
 

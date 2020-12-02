@@ -126,9 +126,9 @@ class UserModel extends Database{
         return $this->prepare($change, []);
     }
 
-    public function getUserSurveys()
+    public function getUserSurveys($id)
     {
-        $surv = "SELECT * FROM surveys WHERE creatorsId = '" . $_SESSION['ID'] . "'";
+        $surv = "SELECT * FROM surveys WHERE creatorsId = '" . $id . "'";
         return $this->query($surv, true);
     }
 

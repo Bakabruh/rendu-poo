@@ -16,9 +16,11 @@ class UserController {
     public function userIndex()
     {
 
-        $surveys = $this->model->getUserSurveys();
+        $id = $_SESSION['ID'];
+
+        $surveys = $this->model->getUserSurveys($id);
          
-        $friends = $this->model->getFriends($_SESSION['ID']);
+        $friends = $this->model->getFriends($id);
 
 
         foreach ($friends as $fr) {
@@ -33,7 +35,7 @@ class UserController {
         }
         
 
-        $fReqs = $this->model->getReqs($_SESSION['ID']);
+        $fReqs = $this->model->getReqs($id);
 
         if(isset($_POST['search'])) {
 
@@ -82,7 +84,6 @@ class UserController {
     
                 $ver = $this->model->verifCreate();
 
-                var_dump($ver);
     
                 if($ver != []) {
     
@@ -90,18 +91,19 @@ class UserController {
     
                 } else {
                 
-                    $this->model->createUser($newUser);
-
+                    $test = $this->model->createUser($newUser);
         
                     $getId = $this->model->getId($newUser['name']);
-    
+
                     $_SESSION['Connected'] = true;
                     $_SESSION['Username'] = $_POST['name'];
                     $_SESSION['Usermail'] = $_POST['mail'];
                     $_SESSION['theme'] = "white";
-                    $_SESSION['ID'] = $getId;
-    
-                    header("Location: index.php?page=home");
+                    $_SESSION['ID'] = $getId['user_id'];
+
+                    
+                    require ROOT."/App/View/homeIndex.php";
+                    
                 }
             }
             
@@ -137,11 +139,8 @@ class UserController {
 
     public function disconnect() 
     {
-        if(isset($_GET['action']) && $_GET['action'] == 'disconnect') {
 
-            session_destroy();
-            require ROOT."/App/View/userCreateView.php";
-		}
+        session_destroy();
 		
     }
 
@@ -238,6 +237,11 @@ class UserController {
         $this->model->newColor($color);
 
         $_SESSION['theme'] = $color;
+    }
+
+    public function renderCreate()
+    {
+        require ROOT."/App/View/userCreateView.php";
     }
 
 

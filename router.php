@@ -71,6 +71,7 @@ if(array_key_exists("page", $_GET)){
             if(isset($_GET['action']) && $_GET['action'] == 'disconnect') {
                 $controller = new UserController();
                 $controller->disconnect(); 
+                $controller->renderCreate();
 
             // si l'utilisateur est connecté
             } else if(isset($_POST['action']) && $_POST['action'] == 'connect') {

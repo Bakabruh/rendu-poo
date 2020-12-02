@@ -61,10 +61,19 @@ class UserController {
     {
         $viName = $_GET['name'];
         if($viName != "") {
+
+
             $host = $this->model->searchFriends($viName);
+
+            $id = $host[0]["user_id"];
+
+            $surveys = $this->model->getUserSurveys($id);
+
             require ROOT."/App/View/userVisitView.php";
         } else {
+
             require ROOT."/App/View/errorView.php";
+
         }
     }
 

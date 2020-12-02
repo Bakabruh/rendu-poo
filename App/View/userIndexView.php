@@ -15,29 +15,29 @@ require ROOT."/commons.php";
 
     <?php if(count($surveys) <= 0) { ?>
 
-<p>C'est vide par ici</p>
+        <p>C'est vide par ici</p>
 
-<?php } else { ?>
+    <?php } else { ?>
 
-<table class="table" id="friendTable">
-    <thead class="thead-dark">
-    <tr>
-        <th scope="col">Status</th>
-        <th scope="col">Question</th>
-    </tr>
-
-    <?php foreach($surveys as $su) { ?>
-
+    <table class="table" id="friendTable">
+        <thead class="thead-dark">
         <tr>
-            <td>En cours</td>
-            <td><a href="?page=survey&id=<?= $su['survey_id'] ?>"><?= $su['question'] ?></a></td>
+            <th scope="col">Status</th>
+            <th scope="col">Question</th>
         </tr>
 
+        <?php foreach($surveys as $su) { ?>
+
+            <tr>
+                <td>En cours</td>
+                <td><a href="?page=survey&id=<?= $su['survey_id'] ?>"><?= $su['question'] ?></a></td>
+            </tr>
+
+        <?php } ?>
+
+    </table>
+
     <?php } ?>
-
-</table>
-
-<?php } ?>
 
     <hr>
 
@@ -56,7 +56,6 @@ require ROOT."/commons.php";
                 <tr>
                     <th scope="col">Status</th>
                     <th scope="col">Pseudo</th>
-                    <th scope="col">Sondage en cours ?</th>
                     <th scope="col">#</th>
                     <th scope="col">Action</th>
                 </tr>
@@ -66,7 +65,6 @@ require ROOT."/commons.php";
                     <tr>
                         <td>Offline</td>
                         <td><a href="?page=user&name=<?= $fr['user_name'] ?>"><?= $fr['user_name'] ?></a></td>
-                        <td>None</td>
                         <td><?= $fr['user_id'] ?></td>
                         <td>
                             <form action="?page=user" method="POST"> 
@@ -144,7 +142,7 @@ require ROOT."/commons.php";
 
         <?php if(isset($quest)) { ?>
 
-            <p>Liste des utilisateurs avec un pseudo comprenant <strong><?= $_POST['search'] ?></strong></p>
+            <p>Liste des utilisateurs étrangers avec un pseudo comprenant <strong><?= $_POST['search'] ?></strong></p>
 
             <table class="table" id="SearchTable">
                 <thead class="thead-dark">

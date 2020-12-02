@@ -43,7 +43,7 @@ require ROOT."/commons.php";
   <div class="card-header"><a href="?page=survey&id=<?= $su['survey_id'] ?>"><?php echo $su['question'] ?></a></div>
   <div class="card-body">
     <h4 class="card-title"></h4>
-    <p class="card-text">Crée par : <?= $su['user_name'] ?></p>
+    <p class="card-text">Crée par : <a href="?page=user&name=<?= $su['user_name'] ?>"><?= $su['user_name'] ?></a></p>
   </div>
 </div>
 

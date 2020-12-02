@@ -21,14 +21,46 @@ if(array_key_exists("page", $_GET)){
 
         case 'survey' :
 
-            if(isset($_POST['vote'])) {
-                $controller = new surveyController();
-                $controller->vote();
-                $controller->renderSurvey();
+            if(array_key_exists("id", $_GET) && $_GET['id'] != "") {
+                if(isset($_POST['vote'])) {
+                    $controller = new surveyController();
+                    $controller->vote();
+                    $controller->renderSurvey();
+                } else if(array_key_exists("function", $_GET)){
+
+                    switch($_GET["function"]) {
+
+                        case 'score' :
+                            $controller = new surveyController();
+                            $controller->getVotes();
+                        break;
+
+                        case 'comment' :
+                            $controller = new surveyController();
+                            $controller->postMessages();
+                            $controller->renderSurvey();
+                        break;
+
+                        case 'coms' :
+                            $controller = new surveyController();
+                            $controller->getMessages();
+                        break;
+
+                        default :
+
+                        break;
+                    }
+                    
+                } else {
+                    $controller = new surveyController();
+                    $controller->renderSurvey();
+                }
             } else {
-                $controller = new surveyController();
-                $controller->renderSurvey();
+                $controller = new DefaultController();
+                $controller->homeIndex();
             }
+
+            
 
         break;
         

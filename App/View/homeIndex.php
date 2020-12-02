@@ -1,3 +1,4 @@
+  
 <?php
 
 use App\Controller\DefaultController;
@@ -29,13 +30,8 @@ require ROOT."/commons.php";
 <!-- Main content -->
 
 <div class="jumbotron">
-  <h1 class="display-3">Hello, world!</h1>
-  <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
-  <hr class="my-4">
-  <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
-  <p class="lead">
-    <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
-  </p>
+  <h1 class="display-3">SurveySite</h1>
+  <p class="lead">Bienvenue sur notre site de sondage, créez un sondage ou votez sur ceux ci-dessous !</p>
 </div>
 
 <!-- Sondages sous forme de carte à cliquer -->
@@ -52,34 +48,7 @@ require ROOT."/commons.php";
   </div>
 </div>
 
-<div class="card border-primary mb-3" style="max-width: 20rem; margin: 50px">
-  <div class="card-header"><a href="?page=write">Survey</a></div>
-  <div class="card-body">
-    <h4 class="card-title"></h4>
-    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-  </div>
-</div>
-<div class="card border-primary mb-3" style="max-width: 20rem; margin: 50px">
-  <div class="card-header"><a href="?page=write">Survey</a></div>
-  <div class="card-body">
-    <h4 class="card-title"></h4>
-    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-  </div>
-</div>
-<div class="card border-primary mb-3" style="max-width: 20rem; margin: 50px">
-  <div class="card-header"><a href="?page=write">Survey</a></div>
-  <div class="card-body">
-    <h4 class="card-title"></h4>
-    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-  </div>
-</div>
-<div class="card border-primary mb-3" style="max-width: 20rem; margin: 50px">
-  <div class="card-header"><a href="?page=write">Survey</a></div>
-  <div class="card-body">
-    <h4 class="card-title"></h4>
-    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-  </div>
-</div>
+<?php endforeach; ?>
 
 </div>
     

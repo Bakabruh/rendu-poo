@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.2
+-- version 5.0.4
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost:3306
--- Generation Time: Dec 01, 2020 at 02:35 AM
--- Server version: 5.7.24
--- PHP Version: 7.2.19
+-- Hôte : localhost:3306
+-- Généré le : mer. 02 déc. 2020 à 19:50
+-- Version du serveur :  5.7.24
+-- Version de PHP : 7.2.19
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,13 +18,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `poll-poo`
+-- Base de données : `poll-poo`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `answers`
+-- Structure de la table `answers`
 --
 
 CREATE TABLE `answers` (
@@ -35,7 +35,7 @@ CREATE TABLE `answers` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `answers`
+-- Déchargement des données de la table `answers`
 --
 
 INSERT INTO `answers` (`id`, `survey_id`, `reponse`, `votes`) VALUES
@@ -48,7 +48,7 @@ INSERT INTO `answers` (`id`, `survey_id`, `reponse`, `votes`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `bonds`
+-- Structure de la table `bonds`
 --
 
 CREATE TABLE `bonds` (
@@ -58,7 +58,7 @@ CREATE TABLE `bonds` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `bonds`
+-- Déchargement des données de la table `bonds`
 --
 
 INSERT INTO `bonds` (`bonds_id`, `user_id1`, `user_id2`) VALUES
@@ -68,7 +68,7 @@ INSERT INTO `bonds` (`bonds_id`, `user_id1`, `user_id2`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `comments`
+-- Structure de la table `comments`
 --
 
 CREATE TABLE `comments` (
@@ -80,7 +80,7 @@ CREATE TABLE `comments` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `comments`
+-- Déchargement des données de la table `comments`
 --
 
 INSERT INTO `comments` (`comment_id`, `author`, `content`, `created_at`, `conv_id`) VALUES
@@ -95,7 +95,7 @@ INSERT INTO `comments` (`comment_id`, `author`, `content`, `created_at`, `conv_i
 -- --------------------------------------------------------
 
 --
--- Table structure for table `conversations`
+-- Structure de la table `conversations`
 --
 
 CREATE TABLE `conversations` (
@@ -106,7 +106,7 @@ CREATE TABLE `conversations` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `requests`
+-- Structure de la table `requests`
 --
 
 CREATE TABLE `requests` (
@@ -117,7 +117,7 @@ CREATE TABLE `requests` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `requests`
+-- Déchargement des données de la table `requests`
 --
 
 INSERT INTO `requests` (`request_id`, `user_1_id`, `user_2_id`, `state`) VALUES
@@ -126,7 +126,7 @@ INSERT INTO `requests` (`request_id`, `user_1_id`, `user_2_id`, `state`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `surveys`
+-- Structure de la table `surveys`
 --
 
 CREATE TABLE `surveys` (
@@ -137,7 +137,7 @@ CREATE TABLE `surveys` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `surveys`
+-- Déchargement des données de la table `surveys`
 --
 
 INSERT INTO `surveys` (`survey_id`, `question`, `end`, `creatorsId`) VALUES
@@ -147,7 +147,7 @@ INSERT INTO `surveys` (`survey_id`, `question`, `end`, `creatorsId`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `users`
+-- Structure de la table `users`
 --
 
 CREATE TABLE `users` (
@@ -160,7 +160,7 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `users`
+-- Déchargement des données de la table `users`
 --
 
 INSERT INTO `users` (`user_id`, `user_name`, `user_pass`, `user_email`, `status`, `user_theme`) VALUES
@@ -170,17 +170,17 @@ INSERT INTO `users` (`user_id`, `user_name`, `user_pass`, `user_email`, `status`
 (31, 'ttt', '$2y$10$Y2LrEJ.QNDn0sY81sNFTZObbA3ZBxistiUCog4NT/hyuSvsVXcmGm', 'ttt@ttt.fr', 0, 'white');
 
 --
--- Indexes for dumped tables
+-- Index pour les tables déchargées
 --
 
 --
--- Indexes for table `answers`
+-- Index pour la table `answers`
 --
 ALTER TABLE `answers`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `bonds`
+-- Index pour la table `bonds`
 --
 ALTER TABLE `bonds`
   ADD PRIMARY KEY (`bonds_id`),
@@ -188,88 +188,88 @@ ALTER TABLE `bonds`
   ADD KEY `user_id1` (`user_id1`);
 
 --
--- Indexes for table `comments`
+-- Index pour la table `comments`
 --
 ALTER TABLE `comments`
   ADD PRIMARY KEY (`comment_id`);
 
 --
--- Indexes for table `conversations`
+-- Index pour la table `conversations`
 --
 ALTER TABLE `conversations`
   ADD PRIMARY KEY (`convo_id`);
 
 --
--- Indexes for table `requests`
+-- Index pour la table `requests`
 --
 ALTER TABLE `requests`
   ADD PRIMARY KEY (`request_id`);
 
 --
--- Indexes for table `surveys`
+-- Index pour la table `surveys`
 --
 ALTER TABLE `surveys`
   ADD PRIMARY KEY (`survey_id`);
 
 --
--- Indexes for table `users`
+-- Index pour la table `users`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`user_id`),
   ADD UNIQUE KEY `user_email` (`user_email`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT pour les tables déchargées
 --
 
 --
--- AUTO_INCREMENT for table `answers`
+-- AUTO_INCREMENT pour la table `answers`
 --
 ALTER TABLE `answers`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
--- AUTO_INCREMENT for table `bonds`
+-- AUTO_INCREMENT pour la table `bonds`
 --
 ALTER TABLE `bonds`
   MODIFY `bonds_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
--- AUTO_INCREMENT for table `comments`
+-- AUTO_INCREMENT pour la table `comments`
 --
 ALTER TABLE `comments`
   MODIFY `comment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
--- AUTO_INCREMENT for table `conversations`
+-- AUTO_INCREMENT pour la table `conversations`
 --
 ALTER TABLE `conversations`
   MODIFY `convo_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `requests`
+-- AUTO_INCREMENT pour la table `requests`
 --
 ALTER TABLE `requests`
   MODIFY `request_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
--- AUTO_INCREMENT for table `surveys`
+-- AUTO_INCREMENT pour la table `surveys`
 --
 ALTER TABLE `surveys`
   MODIFY `survey_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
--- AUTO_INCREMENT for table `users`
+-- AUTO_INCREMENT pour la table `users`
 --
 ALTER TABLE `users`
   MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
--- Constraints for dumped tables
+-- Contraintes pour les tables déchargées
 --
 
 --
--- Constraints for table `bonds`
+-- Contraintes pour la table `bonds`
 --
 ALTER TABLE `bonds`
   ADD CONSTRAINT `bonds_ibfk_1` FOREIGN KEY (`user_id1`) REFERENCES `users` (`user_id`),

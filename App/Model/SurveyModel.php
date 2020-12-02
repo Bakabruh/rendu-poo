@@ -7,11 +7,11 @@ class SurveyModel extends Database
 {
 
     // fonctions pour créer un sondage et les envoyer en bdd
-    public function createSurvey(array $cs)
+    public function createSurvey(array $cs, $h, $m)
     {
-        $surveyCreation = "INSERT INTO surveys(question, end, creatorsId) VALUES(:pollTitle, :endDate, :id)";
+        $surveyCreation = "INSERT INTO surveys(question, end, creatorsId) VALUES(:pollTitle, :default, :id)";
 
-        
+        var_dump($surveyCreation);
         return $this->prepare($surveyCreation, $cs);
     }
 
@@ -27,13 +27,11 @@ class SurveyModel extends Database
         return $this->prepare($survey2, $data);
     }
 
-
-
     // fonction pour afficher le sondage séléctionné
 
-    public function getSurvey()
+    public function getSurvey($id)
     {
-        $getEm = "SELECT * FROM surveys INNER JOIN users on surveys.creatorsId = users.user_id";
+        $getEm = "SELECT * FROM surveys INNER JOIN users on surveys.creatorsId = users.user_id WHERE survey_id = '" . $id . "'";
         return $this->query($getEm, false);
     }
 
@@ -57,16 +55,16 @@ class SurveyModel extends Database
         return $this->prepare($update, []);
     }
 
-    public function getMess()
+    public function getMess($id)
     {
-        $msg = "SELECT * FROM comments ORDER BY created_at DESC LIMIT 15";
+        $msg = "SELECT * FROM comments WHERE conv_id = '" . $id .  "'";
 
         return $this->query($msg, true);
     }
 
     public function postMess($newmsg)
     {
-        $postMsg = "INSERT INTO comments(author, content) VALUES(:author, :content)";
+        $postMsg = "INSERT INTO comments(author, content, conv_id) VALUES(:author, :content, :conv)";
 
         return $this->prepare($postMsg, $newmsg);
     }

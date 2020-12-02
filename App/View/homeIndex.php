@@ -29,8 +29,8 @@ require ROOT."/commons.php";
 <!-- Main content -->
 
 <div class="jumbotron">
-  <h1 class="display-3">Hello, world!</h1>
-  <p class="lead">Welcome on the new survey plateform : here you can create create your own survey or vote for the choice you think is the best, in the large variety of surveys that other users have already done.</p>
+  <h1 class="display-3">SurveySite</h1>
+  <p class="lead">Bienvenue sur notre site de sondage, créez un sondage ou votez sur ceux ci-dessous !</p>
 </div>
 
 <!-- Sondages sous forme de carte à cliquer -->

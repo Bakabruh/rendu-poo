@@ -42,7 +42,16 @@ require ROOT."/bootstraplink.html"; ?>
         <label for="pollTitle">Survey's question</label>
         <input type="text" name="pollTitle" id="pollTitle" placeholder="Question...">
         <label for="time">How much time do you want to set ?</label>
-        <input type="time" name="time" id="time">
+        <select name="hour">
+            <?php for($i = 0; $i < 24; $i++): ?>                 
+                <option value="<?php echo $i; ?>"><?php echo $i; ?></option>
+            <?php endfor; ?>         
+        </select>          
+        <select name="minutes">             
+            <?php for($i = 0; $i < 60; $i++): ?>                 
+                <option value="<?php echo $i; ?>"><?php echo $i; ?></option>             
+            <?php endfor; ?>         
+        </select>
         <label for="select">Possible answers :</label>
         <input type="text" value="" name="response1" required>
         <input type="text" value="" name="response2" required>

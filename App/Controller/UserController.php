@@ -140,7 +140,6 @@ class UserController {
         if(isset($_GET['action']) && $_GET['action'] == 'disconnect') {
 
             session_destroy();
-            header("Location: index.php?page=create-user");
             require ROOT."/App/View/userCreateView.php";
 		}
 		

@@ -9,7 +9,7 @@ class SurveyModel extends Database
     // fonctions pour créer un sondage et les envoyer en bdd
     public function createSurvey(array $cs, $h, $m)
     {
-        $surveyCreation = "INSERT INTO surveys(question, end, creatorsId) VALUES(:pollTitle, NOW() + INTERVAL $h HOUR , :id)";
+        $surveyCreation = "INSERT INTO surveys(question, end, creatorsId) VALUES(:pollTitle, :default, :id)";
 
         var_dump($surveyCreation);
         return $this->prepare($surveyCreation, $cs);

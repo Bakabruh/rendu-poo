@@ -28,6 +28,7 @@ class surveyController
 
         $newSurvey = [
             "pollTitle" => $_POST['pollTitle'],
+            "default" =>$_POST['time'],
             "hour" => $heure,
             "minutes" => $minutes,
             "id" => $_SESSION['ID']

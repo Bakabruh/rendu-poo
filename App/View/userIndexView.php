@@ -42,14 +42,15 @@ require ROOT."/commons.php";
     <hr>
 
     <section>
-
         <h2>Liste d'amis</h2>
 
         <?php if(count($friends) <= 0) { ?>
 
             <p>C'est vide par ici</p>
 
-        <?php } else { ?>
+        <?php } else {          
+            
+            ?>
 
             <table class="table" id="friendTable">
                 <thead class="thead-dark">

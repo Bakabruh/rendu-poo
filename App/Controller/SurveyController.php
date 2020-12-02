@@ -20,18 +20,16 @@ class surveyController
     public function createSurvey()
     {
 
-        $timeSplit = explode(":", $_POST['time']);
+        $date = new \DateTime();
+        $date->modify('+ ' . $_POST['hour'] . 'hours');
+        $date->modify('+ ' . $_POST['minute'] . 'minutes');
 
-        $heure = $timeSplit[0];
-        $minutes = $timeSplit[1];
-
+        $dateEnd = $date->format('Y-m-d H:i:s');
 
         $newSurvey = [
             "pollTitle" => $_POST['pollTitle'],
-            "default" =>$_POST['time'],
-            "hour" => $heure,
-            "minutes" => $minutes,
-            "id" => $_SESSION['ID']
+            "id"        => $_SESSION['ID']['user_id'],
+            "dateEnd"   => $dateEnd,
         ];
 
         $answers = [
@@ -41,7 +39,7 @@ class surveyController
             "response4" => $_POST['response4']
         ];
 
-        $this->model->createSurvey($newSurvey, $heure, $minutes);
+        $this->model->createSurvey($newSurvey);
 
         $id = $this->model->getSurveyId();
 

@@ -23,10 +23,10 @@
 <div class="collapse navbar-collapse" id="navbarNav">
   <ul class="navbar-nav">
     <li class="nav-item active">
-        <a class="nav-link" href="?page=home">Home</a>
+        <a class="nav-link" href="?page=home">Menu</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="?page=createSurvey">Create a survey</a>
+      <a class="nav-link" href="?page=createSurvey">Créer un sondage</a>
     </li>
 
     <?php if(isset($_SESSION["Connected"]) && $_SESSION == true) { ?>
@@ -35,7 +35,7 @@
       </li>
 
       <li class="nav-item">
-        <a class="nav-link" href="?page=create-user&action=disconnect">Log Out</a>
+        <a class="nav-link" href="?page=create-user&action=disconnect">Déconnexion</a>
       </li>
     <?php } 
     

@@ -13,6 +13,7 @@ class UserController {
         $this->model = new UserModel();
     }
 
+    //fonction qui récup les amis, les requetes et les sondages de l'utilisateurs pour render son profile
     public function userIndex()
     {
 
@@ -23,6 +24,7 @@ class UserController {
         $friends = $this->model->getFriends($id);
 
 
+        //boucle pour se retirer de la liste des amis
         foreach ($friends as $fr) {
 
             if ($fr['user_id'] == $_SESSION['ID']) {
@@ -34,7 +36,6 @@ class UserController {
 
         }
         
-
         $fReqs = $this->model->getReqs($id);
 
         if(isset($_POST['search'])) {
@@ -56,12 +57,11 @@ class UserController {
     }
 
     
-
+    //fonction qui affiche les pages des gens que l'on visite, et leurs sondages
     public function visitUser()
     {
         $viName = $_GET['name'];
         if($viName != "") {
-
 
             $host = $this->model->searchFriends($viName);
 
@@ -78,7 +78,7 @@ class UserController {
     }
 
     
-
+    // fonction pour créer un utilisateur et le connecter
     public function createUser() 
     {
         if($_POST && $_POST['action'] == "create") {
@@ -121,6 +121,7 @@ class UserController {
         require ROOT."/App/View/userCreateView.php";
     }
 
+    //fonction pour se connecter
     public function connectUser() 
     {
         if($_POST && $_POST['action'] == "connect") {
@@ -146,13 +147,18 @@ class UserController {
         }
     }
 
+    // fonction pour se déconnecter
     public function disconnect() 
     {
 
         session_destroy();
+
+        require ROOT."/App/View/userCreateView.php";
 		
     }
 
+
+    //envoyer une requete d'ami
     public function sendRequest()
     {
 
@@ -166,16 +172,11 @@ class UserController {
             $this->model->addFriend($fR);
         }
 
-        
-
-        
-
-
         header("Location: index.php?page=user");
-        // echo "<script>alert('Demande d'amis envoyée à " . $_POST['rq_user_name'] . "')</script>";
 
     }
 
+    // traiter les requetes d'amis reçues, les accepter ou refuser
     public function treatRequest()
     {
         $id1 = $_POST['id1'];
@@ -189,8 +190,6 @@ class UserController {
             $this->model->treatReq($choice, $id1, $id2, $id3);
 
             header("Location: index.php?page=user");
-
-            
 
         } else if (isset($_POST['decline'])) {
 
@@ -206,6 +205,7 @@ class UserController {
         }
     }
 
+    //supprimer un utilisateur de sa liste
     public function deleteFriend()
     {
         $id1 = $_POST['delete'];
@@ -214,7 +214,7 @@ class UserController {
         $this->model->delFriend($id1, $id2);
     }
 
-
+    //changer son nom d'utilisateur
     public function newName()
     {
         $newname = $_POST['newname'];
@@ -239,6 +239,7 @@ class UserController {
 
     }
 
+    // changer le thème du site sur son profil
     public function newColor()
     {
         $color = $_POST['color'];
@@ -248,10 +249,6 @@ class UserController {
         $_SESSION['theme'] = $color;
     }
 
-    public function renderCreate()
-    {
-        require ROOT."/App/View/userCreateView.php";
-    }
 
 
 }

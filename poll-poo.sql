@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Dec 01, 2020 at 02:35 AM
+-- Generation Time: Dec 03, 2020 at 12:42 AM
 -- Server version: 5.7.24
 -- PHP Version: 7.2.19
 
@@ -39,11 +39,45 @@ CREATE TABLE `answers` (
 --
 
 INSERT INTO `answers` (`id`, `survey_id`, `reponse`, `votes`) VALUES
-(8, 7, 'McDo', 0),
-(9, 7, 'Salade', 0),
-(10, 7, 'Tomate', 0),
-(17, 10, 'Xbox', 0),
-(18, 10, 'Play', 0);
+(8, 7, 'McDo', 20),
+(9, 7, 'Salade', 1),
+(10, 7, 'Tomate', 3),
+(17, 10, 'Xbox', 11),
+(18, 10, 'Play', 36),
+(22, 12, 'Nisouc', 0),
+(23, 12, 'Nisouc', 2),
+(24, 13, 'de', 0),
+(25, 13, 'dd', 0),
+(26, 14, 'dede', 0),
+(27, 14, 'ded', 0),
+(28, 15, 'deded', 1),
+(29, 15, 'eeeeee', 0),
+(30, 16, 'cecece', 0),
+(31, 16, 'cecececec', 1),
+(32, 17, 'McDo', 1),
+(33, 17, 'Salade', 0),
+(34, 18, 'Xbox', 0),
+(35, 18, 'Play', 1),
+(36, 19, 'de', 0),
+(37, 19, 'dd', 0),
+(38, 20, 'de', 0),
+(39, 20, 'dd', 0),
+(40, 21, '1', 1),
+(41, 21, '2', 2),
+(42, 21, '3', 3),
+(43, 21, '4', 4),
+(44, 22, 'efef', 0),
+(45, 22, 'efe', 0),
+(46, 23, 'de', 0),
+(47, 23, 'Play', 0),
+(48, 24, 'dcd', 0),
+(49, 24, 'dcdcd', 0),
+(50, 25, 'cc', 0),
+(51, 25, 'dd', 0),
+(52, 26, 'z', 0),
+(53, 26, 'z', 0),
+(54, 27, 'dede', 0),
+(55, 27, 'dedede', 0);
 
 -- --------------------------------------------------------
 
@@ -79,30 +113,6 @@ CREATE TABLE `comments` (
   `conv_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- Dumping data for table `comments`
---
-
-INSERT INTO `comments` (`comment_id`, `author`, `content`, `created_at`, `conv_id`) VALUES
-(1, 'Nisouc', 'dd', '2020-11-30 22:51:08', 1),
-(2, 'Nisouc', 'oo', '2020-11-30 22:51:11', 1),
-(3, 'Nisouc', 'oo', '2020-11-30 22:52:34', 1),
-(4, 'Nisouc', 'oo', '2020-11-30 22:52:35', 1),
-(5, 'Nisouc', 'oo', '2020-11-30 22:54:59', 1),
-(6, 'Nisouc', 'oo', '2020-11-30 22:55:00', 1),
-(17, 'Nisouc', 'oo', '2020-11-30 22:56:59', 1);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `conversations`
---
-
-CREATE TABLE `conversations` (
-  `convo_id` int(11) NOT NULL,
-  `poll_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
 -- --------------------------------------------------------
 
 --
@@ -132,17 +142,18 @@ INSERT INTO `requests` (`request_id`, `user_1_id`, `user_2_id`, `state`) VALUES
 CREATE TABLE `surveys` (
   `survey_id` int(11) NOT NULL,
   `question` varchar(255) NOT NULL,
-  `end` varchar(255) NOT NULL,
-  `creatorsId` int(11) NOT NULL
+  `end` datetime NOT NULL,
+  `creatorsId` int(11) NOT NULL,
+  `status` int(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `surveys`
 --
 
-INSERT INTO `surveys` (`survey_id`, `question`, `end`, `creatorsId`) VALUES
-(7, 'Quel repas ce soir ?', '04:20', 28),
-(10, 'Meilleure console ?', '02:24', 28);
+INSERT INTO `surveys` (`survey_id`, `question`, `end`, `creatorsId`, `status`) VALUES
+(17, 'Quel repas ce soir ?', '2020-12-03 10:36:35', 28, 1),
+(18, 'Meilleure console ?', '2020-12-03 06:52:36', 31, 1);
 
 -- --------------------------------------------------------
 
@@ -155,7 +166,7 @@ CREATE TABLE `users` (
   `user_name` varchar(255) NOT NULL,
   `user_pass` varchar(255) NOT NULL,
   `user_email` varchar(255) NOT NULL,
-  `status` tinyint(1) NOT NULL,
+  `user_status` tinyint(1) NOT NULL,
   `user_theme` varchar(255) NOT NULL DEFAULT 'white'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -163,11 +174,12 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`user_id`, `user_name`, `user_pass`, `user_email`, `status`, `user_theme`) VALUES
-(28, 'Nisouc', '$2y$10$EkVmiwRVVN9T.v4zbewyDupSWweqTrO7iLTHaFMXJkbbz9k/.tiTa', 'Nisouc@outlook.com', 0, 'dimgrey'),
+INSERT INTO `users` (`user_id`, `user_name`, `user_pass`, `user_email`, `user_status`, `user_theme`) VALUES
+(28, 'Nisouc', '$2y$10$EkVmiwRVVN9T.v4zbewyDupSWweqTrO7iLTHaFMXJkbbz9k/.tiTa', 'Nisouc@outlook.com', 0, 'white'),
 (29, 'test', '$2y$10$dsu1Uz0f3BvLnrPtAGIJ1upKw1xroQUc2p78ay3ZSzbldaaM0KyXO', 'test@test.fr', 0, 'white'),
 (30, 'essai', '$2y$10$3BzdX.08GQTjVgL1DbejTuF1cUbXzwFCWAI2BjNLgFoyFkj.FaHDm', 'essai@essai.fr', 0, 'white'),
-(31, 'ttt', '$2y$10$Y2LrEJ.QNDn0sY81sNFTZObbA3ZBxistiUCog4NT/hyuSvsVXcmGm', 'ttt@ttt.fr', 0, 'white');
+(31, 'ttt', '$2y$10$Y2LrEJ.QNDn0sY81sNFTZObbA3ZBxistiUCog4NT/hyuSvsVXcmGm', 'ttt@ttt.fr', 0, 'white'),
+(35, 'bbb', '$2y$10$SwZ351r/.XTei5G/7V7LmOer/H/ZQM40rGZfMn0T/AND19Ji8U53G', 'bbb@bbb.fr', 0, 'white');
 
 --
 -- Indexes for dumped tables
@@ -192,12 +204,6 @@ ALTER TABLE `bonds`
 --
 ALTER TABLE `comments`
   ADD PRIMARY KEY (`comment_id`);
-
---
--- Indexes for table `conversations`
---
-ALTER TABLE `conversations`
-  ADD PRIMARY KEY (`convo_id`);
 
 --
 -- Indexes for table `requests`
@@ -226,7 +232,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `answers`
 --
 ALTER TABLE `answers`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
 
 --
 -- AUTO_INCREMENT for table `bonds`
@@ -238,13 +244,7 @@ ALTER TABLE `bonds`
 -- AUTO_INCREMENT for table `comments`
 --
 ALTER TABLE `comments`
-  MODIFY `comment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
-
---
--- AUTO_INCREMENT for table `conversations`
---
-ALTER TABLE `conversations`
-  MODIFY `convo_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `comment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=71;
 
 --
 -- AUTO_INCREMENT for table `requests`
@@ -256,13 +256,13 @@ ALTER TABLE `requests`
 -- AUTO_INCREMENT for table `surveys`
 --
 ALTER TABLE `surveys`
-  MODIFY `survey_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `survey_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- Constraints for dumped tables

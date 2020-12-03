@@ -9,11 +9,18 @@ if(isset($_SESSION['Username'])) {
 }
 
 ?>
+<!DOCTYPE html>
+<html lang="fr">
 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rejoignez-nous !</title>
+</head>
 
 <h1>Ce site à besoin d'un compte, rejoins-nous !</h1>
 
-
+<!-- Formulaire de création de compte -->
 <form action="?page=create-user" method="POST">
   <div class="form-group">
     <label for="exampleInputEmail1">Email</label>
@@ -43,6 +50,7 @@ if(isset($_SESSION['Username'])) {
 
 <h1>Déjà membre ? Connecte toi !</h1>
 
+<!-- Formulaire de connexion -->
 <form action="?page=create-user" method="POST">
   <div class="form-group">
     <label for="exampleInputEmail1">Email</label>

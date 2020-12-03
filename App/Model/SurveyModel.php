@@ -10,8 +10,6 @@ class SurveyModel extends Database
     public function createSurvey(array $cs)
     {
         $surveyCreation = "INSERT INTO surveys(question, end, creatorsId) VALUES(:pollTitle, :dateEnd, :id)";
-
-        var_dump($surveyCreation);
         return $this->prepare($surveyCreation, $cs);
     }
 
@@ -37,6 +35,12 @@ class SurveyModel extends Database
         return $this->query($getEm, false);
     }
 
+    public function setStatus($id)
+    {
+        $change = "UPDATE surveys SET status = '0' WHERE survey_id = '" . $id . "'";
+        return $this->prepare($change, []);
+    }
+
     public function getAnswers($id)
     {
         $getEm = "SELECT * FROM answers WHERE survey_id = '" . $id . "'";
@@ -55,6 +59,12 @@ class SurveyModel extends Database
     {
         $update = "UPDATE answers SET votes = '" . $v . "' WHERE id = '" . $id . "'";
         return $this->prepare($update, []);
+    }
+
+    public function getStatus($id)
+    {
+        $stat = "SELECT * FROM surveys WHERE survey_id = '" . $id .  "'";
+        return $this->query($stat, false);
     }
 
     public function getMess($id)

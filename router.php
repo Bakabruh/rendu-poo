@@ -19,6 +19,7 @@ if(array_key_exists("page", $_GET)){
             $controller->renderCreation();
         break;
 
+        // route vers les sondages
         case 'survey' :
 
             if(array_key_exists("id", $_GET) && $_GET['id'] != "") {
@@ -46,6 +47,11 @@ if(array_key_exists("page", $_GET)){
                             $controller->getMessages();
                         break;
 
+                        case 'status' :
+                            $controller = new surveyController();
+                            $controller->getStatus();
+                        break;
+
                         default :
 
                         break;
@@ -67,13 +73,10 @@ if(array_key_exists("page", $_GET)){
         // route vers la page de création d'utilisateur
         case 'create-user':
 
-            // si l'utilisateur n'est pas connecté
             if(isset($_GET['action']) && $_GET['action'] == 'disconnect') {
                 $controller = new UserController();
                 $controller->disconnect(); 
-                $controller->renderCreate();
 
-            // si l'utilisateur est connecté
             } else if(isset($_POST['action']) && $_POST['action'] == 'connect') {
                 $controller = new UserController();
                 $controller->connectUser(); 
@@ -84,6 +87,7 @@ if(array_key_exists("page", $_GET)){
             
             break;
 
+        // route vers les pages d'utilisateurs
         case 'user' :
 
             if(array_key_exists("page", $_GET) && array_key_exists("name", $_GET)) {

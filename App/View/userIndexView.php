@@ -6,6 +6,15 @@ require ROOT."/commons.php";
 
 ?>
 
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
+</head>
+
 <body>
     <h1>Profile de <?= $_SESSION['Username'] ?></h1>
 
@@ -29,7 +38,7 @@ require ROOT."/commons.php";
         <?php foreach($surveys as $su) { ?>
 
             <tr>
-                <td>En cours</td>
+                <td><?php if ($su['status'] == true) {?> Actif <?php } else if ($su['status'] == 0){ ?> Fini <?php } ?></td>
                 <td><a href="?page=survey&id=<?= $su['survey_id'] ?>"><?= $su['question'] ?></a></td>
             </tr>
 
@@ -196,6 +205,7 @@ require ROOT."/commons.php";
 
     <h2>Modification du profil</h2>
 
+    <!-- Formulaire pour changer son pseudo -->
     <form action="?page=user" method="POST">
         <label>Vous voulez changer de nom ?</label>
         <input type="text" placeholder="Nouveau nom.." name="newname" required>
@@ -208,6 +218,7 @@ require ROOT."/commons.php";
 
     <br><br><br>
 
+    <!-- Formulaire pour changer le thème de son site -->
     <form action="?page=user" method="POST" class="colorForm">
         <label>Changer le couleur de fond ?</label>
         <br>

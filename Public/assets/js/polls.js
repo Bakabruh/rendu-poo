@@ -1,5 +1,6 @@
+// Fonction qui récupère les paramètres GET de l'URL, copiée d'un stack overflow
 function $_GET(param) {
-    var vars = {};
+    let vars = {};
     window.location.href.replace( location.hash, '' ).replace( 
         /[?&]+([^=&]+)=?([^&]*)?/gi, // regexp
         function( m, key, value ) { // callback
@@ -13,6 +14,7 @@ function $_GET(param) {
     return vars;
 }
 
+//fonction pour afficher les voix d'un sondage
 function scoreboard(){
     $("#results").html("")
     $.ajax({
@@ -41,9 +43,11 @@ scoreboard();
 
 setInterval(scoreboard, 5000);
 
-renderMessages();
 
+// fonction pour envoyer son commentaire et l'afficher
 $("#button").click(function(e){
+
+    console.log('test');
     // e.preventDefault();
     let content = $("#comment").val();
     $.ajax({
@@ -53,10 +57,13 @@ $("#button").click(function(e){
         data:{content},
         success:function(response){
             renderMessages();
+            console.log('test');
         }
     })
 })
 
+
+//fonction pour afficher les commentaires
 function renderMessages()
 {
 
@@ -73,4 +80,43 @@ function renderMessages()
     })
 }
 
-setInterval(renderMessages, 5000);
+renderMessages();
+
+setInterval(renderMessages, 10000);
+
+// let x = 0;
+// function status(){
+ 
+//     $.ajax({
+//         url:"?page=survey&id=" + $_GET("id") +"&function=status",
+//         dataType:"json",
+//         success:function(response){
+
+//             console.log("zizibouche");
+
+//             if (response.status == 0) {
+//                 $(".voter").css("display", "none");
+//                 $(".sectioncoms").append(`
+//                 <hr>
+
+//                 <h2>Commentaires</h2>
+        
+//                 <div id="commentbox">
+//                 </div>
+//                 <form>
+//                     <input type="text" name="comment" id="comment">
+//                     <button id="button">Commenter</button>
+//                 </form>`);
+//                 x++;
+//             } 
+            
+//         }
+//     });
+// }
+
+// status();
+
+// while( x = 0) {
+//     setInterval(status, 1000);
+// }
+

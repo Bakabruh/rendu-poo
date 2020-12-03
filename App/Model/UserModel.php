@@ -9,7 +9,7 @@ class UserModel extends Database{
     public function getFriends($id)
     {
         $getFriends = 
-        "SELECT users.user_id, users.user_name, users.status  
+        "SELECT users.user_id, users.user_name, users.user_status  
         FROM users 
         INNER JOIN bonds ON user_id1 = '" . $id . "' OR user_id2 = '" . $id . "'
         WHERE bonds.user_id2 = users.user_id OR bonds.user_id1 = users.user_id";
@@ -47,7 +47,7 @@ class UserModel extends Database{
 
     public function createUser(array $nu)
     {
-        $userRequest = "INSERT INTO users (user_name, user_pass, user_email, status) VALUES (:name, :pass, :mail, false)";      
+        $userRequest = "INSERT INTO users (user_name, user_pass, user_email, user_status) VALUES (:name, :pass, :mail, 1)";      
         return $this->prepare($userRequest, $nu);
         
     }

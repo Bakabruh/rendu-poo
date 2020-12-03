@@ -67,3 +67,7 @@ margin: auto;
     display: flex;
     flex-direction: column-reverse;
 }
+
+.sectioncoms {
+    display: none;
+}

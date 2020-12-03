@@ -145,7 +145,8 @@ if(array_key_exists("page", $_GET)){
         break;
     }
 } else {
-    session_destroy();
+    // session_destroy();
+    
     $controller = new UserController();
     $controller->createUser();
 }

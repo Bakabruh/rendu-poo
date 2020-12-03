@@ -5,7 +5,7 @@ use App\Controller\UserController;
 require ROOT."/commons.php"; 
 
 if(isset($_SESSION['Username'])) {
-  header("Location : index.php?page=home");
+  header("Location: index.php?page=home");
 }
 
 ?>

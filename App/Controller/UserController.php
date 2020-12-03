@@ -153,7 +153,7 @@ class UserController {
 
         session_destroy();
 
-        require ROOT."/App/View/userCreateView.php";
+        header("Location: index.php?page=create-user");
 		
     }
 

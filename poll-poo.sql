@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Dec 03, 2020 at 11:16 AM
+-- Generation Time: Dec 03, 2020 at 02:10 PM
 -- Server version: 5.7.24
 -- PHP Version: 7.2.19
 
@@ -57,7 +57,7 @@ INSERT INTO `answers` (`id`, `survey_id`, `reponse`, `votes`) VALUES
 (60, 20, 'Oui', 0),
 (61, 20, 'Non', 4),
 (62, 21, '1', 0),
-(63, 21, '2', 0),
+(63, 21, '2', 1),
 (64, 21, '3', 0),
 (65, 21, '4', 0),
 (66, 22, 'Test1', 7),
@@ -108,7 +108,9 @@ CREATE TABLE `comments` (
 
 INSERT INTO `comments` (`comment_id`, `author`, `content`, `created_at`, `conv_id`) VALUES
 (1, 'Nisouc', 'C\'Ã©tait pas loin', '2020-12-03 10:23:15', 18),
-(14, 'Nisouc', 'ttt c\'est nisouc aussi d\'ailleurs', '2020-12-03 11:15:43', 18);
+(14, 'Nisouc', 'ttt c\'est nisouc aussi d\'ailleurs', '2020-12-03 11:15:43', 18),
+(15, 'Nisouc', 'izi', '2020-12-03 13:51:48', 21),
+(16, 'Nisouc', 'test', '2020-12-03 13:52:06', 21);
 
 -- --------------------------------------------------------
 
@@ -237,7 +239,7 @@ ALTER TABLE `bonds`
 -- AUTO_INCREMENT for table `comments`
 --
 ALTER TABLE `comments`
-  MODIFY `comment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `comment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `requests`
@@ -249,7 +251,7 @@ ALTER TABLE `requests`
 -- AUTO_INCREMENT for table `surveys`
 --
 ALTER TABLE `surveys`
-  MODIFY `survey_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `survey_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `users`

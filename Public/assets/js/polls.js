@@ -16,11 +16,13 @@ function $_GET(param) {
 
 //fonction pour afficher les voix d'un sondage
 function scoreboard(){
-    $("#results").html("")
+    
     $.ajax({
         url:"?page=survey&id=" + $_GET("id") +"&function=score",
         dataType:"json",
         success:function(response){
+
+            $("#results").html("")
 
             let i = 1;
             response.forEach(vote => {
@@ -47,7 +49,6 @@ setInterval(scoreboard, 5000);
 // fonction pour envoyer son commentaire et l'afficher
 $("#button").click(function(e){
 
-    console.log('test');
     // e.preventDefault();
     let content = $("#comment").val();
     $.ajax({
@@ -57,7 +58,6 @@ $("#button").click(function(e){
         data:{content},
         success:function(response){
             renderMessages();
-            console.log('test');
         }
     })
 })
@@ -67,13 +67,13 @@ $("#button").click(function(e){
 function renderMessages()
 {
 
-    $("#commentbox").html("")
+    
     $.ajax({
         url:"?page=survey&id=" + $_GET("id") +"&function=coms",
         dataType:"json",
         success:function(response){
 
-            console.log("cc");
+            $("#commentbox").html("")
             
             response.forEach(message => {
                 $("#commentbox").append(`<div class="message"><h6>${message.author} le ${message.created_at}</h6><p>${message.content}</p></div>`)
@@ -94,8 +94,6 @@ function status(){
         url:"?page=survey&id=" + $_GET("id") +"&function=status",
         dataType:"json",
         success:function(response){
-
-            console.log("zizibouche");
 
             if (response.status == 0) {
                 $(".voter").remove();

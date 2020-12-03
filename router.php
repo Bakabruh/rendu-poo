@@ -4,6 +4,9 @@ use App\Controller\UserController;
 use App\Controller\DefaultController;
 use App\Controller\surveyController;
 
+
+
+
 if(array_key_exists("page", $_GET)){
     switch ($_GET["page"]) {
 
@@ -141,7 +144,8 @@ if(array_key_exists("page", $_GET)){
             }
         break;
     }
-} else{
+} else {
+    session_destroy();
     $controller = new UserController();
     $controller->createUser();
 }

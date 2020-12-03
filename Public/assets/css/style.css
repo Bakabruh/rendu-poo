@@ -65,7 +65,7 @@ margin: auto;
 
 #commentbox {
     display: flex;
-    flex-direction: column-reverse;
+    flex-direction: column;
 }
 
 /* .sectioncoms {

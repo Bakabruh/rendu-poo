@@ -72,10 +72,13 @@ function renderMessages()
         url:"?page=survey&id=" + $_GET("id") +"&function=coms",
         dataType:"json",
         success:function(response){
+
+            console.log("cc");
             
             response.forEach(message => {
                 $("#commentbox").append(`<div class="message"><h6>${message.author} le ${message.created_at}</h6><p>${message.content}</p></div>`)
             });
+            
         }
     })
 }
@@ -84,39 +87,34 @@ renderMessages();
 
 setInterval(renderMessages, 10000);
 
-// let x = 0;
-// function status(){
+
+function status(){
  
-//     $.ajax({
-//         url:"?page=survey&id=" + $_GET("id") +"&function=status",
-//         dataType:"json",
-//         success:function(response){
+    $.ajax({
+        url:"?page=survey&id=" + $_GET("id") +"&function=status",
+        dataType:"json",
+        success:function(response){
 
-//             console.log("zizibouche");
+            console.log("zizibouche");
 
-//             if (response.status == 0) {
-//                 $(".voter").css("display", "none");
-//                 $(".sectioncoms").append(`
-//                 <hr>
+            if (response.status == 0) {
+                $(".voter").remove();
+                $(".sectioncoms").append(`
+                
+                <form action="?page=survey&id=` + $_GET("id") + `&function=comment" method="POST">
+                    <input type="text" name="comment" id="comment">
+                    <button id="button" type="submit">Commenter</button>
+                </form>`);
 
-//                 <h2>Commentaires</h2>
-        
-//                 <div id="commentbox">
-//                 </div>
-//                 <form>
-//                     <input type="text" name="comment" id="comment">
-//                     <button id="button">Commenter</button>
-//                 </form>`);
-//                 x++;
-//             } 
+
+                clearInterval(stat);
+            } 
             
-//         }
-//     });
-// }
+        }
+    });
+}
 
-// status();
+status();
 
-// while( x = 0) {
-//     setInterval(status, 1000);
-// }
+let stat = setInterval(status, 1000);
 

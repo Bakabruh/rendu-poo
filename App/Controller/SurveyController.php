@@ -80,6 +80,8 @@ class surveyController
 
         $reps = $this->model->getAnswers($SurId);
 
+        $coms = $this->model->getMess($SurId);
+
         require ROOT."/App/View/SurveyVisitView.php";  
     }
 

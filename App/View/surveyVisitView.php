@@ -58,7 +58,7 @@ require ROOT."/commons.php";
 
 
     <!-- Affichage des commentaires -->
-    <?php  if ($survey['status'] == 0) { ?>
+   
 
         <div class="sectioncoms">
             <hr>
@@ -66,15 +66,18 @@ require ROOT."/commons.php";
             <h2>Commentaires</h2>
 
             <div id="commentbox">
+                <?php foreach($coms as $com) { ?>
+                    <div class="message"><h6><?= $com['author'] ?> le <?= $com['created_at'] ?></h6><p><?= $com['content'] ?></p></div>
+                <?php } ?>
             </div>
-            <form action="?page=survey&id= <?= $SurId ?>&function=comment" method="POST">
+            <!-- <form action="?page=survey&id= <?= $SurId ?>&function=comment" method="POST">
                 <input type="text" name="comment" id="comment">
                 <button id="button" type="submit">Commenter</button>
-            </form>
+            </form> -->
         </div>
     
-
-    <?php } ?>
+        
+    
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>

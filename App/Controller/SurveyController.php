@@ -12,6 +12,12 @@ class surveyController
         $this->model = new SurveyModel();
     }
 
+    //fonction pour accéder à la création de sondage
+    public function renderCreation()
+    {
+        require ROOT."/App/View/surveyCreationView.php";
+    }
+
     // fonction pour créer un sondage à partir du form de surveyCreationView.php
     public function createSurvey()
     {

@@ -28,7 +28,6 @@ require ROOT."/commons.php";
 
         form label {
             font-family: 'Arial', sans-serif;
-            text-transform: uppercase;
             color: #000;
         }
 
@@ -46,7 +45,7 @@ require ROOT."/commons.php";
 
         <input type="text" name="pollTitle" id="pollTitle" placeholder="Question...">
 
-        <label for="time">Combien de temps va durer le sondage ?</label>
+        <label for="time">Combien de temps va durer le sondage ? (HH:mm)</label>
 
         <!-- choisir les heures -->
         <select name="hour" id="time">
@@ -62,7 +61,7 @@ require ROOT."/commons.php";
             <?php endfor; ?>
         </select>
 
-        <label for="select">Possible answers :</label>
+        <label for="select">Réponses possibles :</label>
 
         <input type="text" value="" name="response1" required>
         <input type="text" value="" name="response2" required>
@@ -71,7 +70,7 @@ require ROOT."/commons.php";
 
         <br>
 
-        <button type="submit">Create your survey</button>
+        <button type="submit">C'est parti !</button>
     </form>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"
